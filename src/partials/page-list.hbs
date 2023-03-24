@@ -1,0 +1,19 @@
+<article class="doc">
+
+{{#if page.attributes.list_attribute}}
+    {{#each (pagesWithAttribute page.attributes.list_attribute)}}
+        <h3 class="no-prose-lint">{{{ ./name }}}</h3>
+        <div><small>{{{ ./description }}}</small></div>
+        <ul>
+        {{#each ./pages}}
+            <li>
+                <a href="{{{relativize ./pub.url}}}">{{{./asciidoc.doctitle}}}</a>
+            </li>
+        {{/each}}
+        </ul>
+    {{/each}}
+{{else}}
+    No pages found
+{{/if}}
+
+</article>

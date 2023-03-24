@@ -2,6 +2,10 @@
 {{#with page.title}}
 <h1 class="page">{{{this}}}</h1>
 {{/with}}
-{{{page.contents}}}
+{{#if (eq page.attributes.layout 'page-list')}}
+    {{> page-list}}
+{{else}}
+    {{{page.contents}}}
+{{/if}}
 {{> pagination}}
 </article>
