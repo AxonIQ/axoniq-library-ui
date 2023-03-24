@@ -154,3 +154,37 @@
 .doc .conum[data-value] {
   color: var(--color-fox);
 }
+
+.needs-improvement {
+  background-color: lightyellow;
+  color: goldenrod;
+  padding: 0;
+  padding-bottom: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  align-items: center;
+}
+
+.needs-improvement::before {
+  content: "⚠️";
+  font-size: xx-large;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.needs-improvement h5 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.needs-improvement ul {
+  font-size: small;
+  padding-left: 1rem;
+}
+
+.needs-improvement .improve-request {
+  font-size: small;
+}
