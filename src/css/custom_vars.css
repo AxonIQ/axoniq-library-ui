@@ -30,6 +30,7 @@
   /* overwrite default values */
   --font-awesome: "FontAwesome";
   --body-font-family: "Lato", sans-serif;
+  --body-font-weight-bold: 700;
   --panel-background: var(--color-seal);
   --panel-border-color: var(--color-gecko);
   --navbar-background: var(--color-white);
