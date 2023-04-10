@@ -5,9 +5,5 @@
   {{/with}}
 {{> breadcrumbs}}
 {{> page-versions}}
-  {{#if (and page.fileUri (not env.CI))}}
-  {{> page-actions}}
-  {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
-  {{> page-actions}}
-  {{/if}}
+{{> page-actions}}
 </div>

@@ -1,10 +1,17 @@
 <div class="page-actions">
   <button class="actions-menu-toggle" title="Show actions related to this page">Actions</button>
   <div class="actions-menu">
+    {{#if (and page.fileUri (not env.CI))}}
+      <a class="action" href="{{page.fileUri}}">Edit this Page</a>
+    {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
+      <a class="action" href="{{page.fileUri}}">Edit this Page</a>
+    {{/if}}
+
     {{#with (discussLink site page)}}
-    <a class="action" href="{{page.fileUri}}">Edit this Page</a>
     <a class="action" href="{{searchUrl}}" target="discuss_search">View Discussions</a>
     <a class="action" href="{{createUrl}}" target="discuss_add">Start new discussion</a>
     {{/with}}
   </div>
 </div>
+
+
