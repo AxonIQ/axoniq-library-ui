@@ -4,7 +4,7 @@ module.exports = (site, page) => {
   var categoryName = 'library'
   var createTitle = encodeURIComponent(`"${page.title}" library page ...`)
   var pageUrl = site.url + page.url
-  var createBody = encodeURIComponent(`
+  var pageUrlEncoded = encodeURIComponent(pageUrl)
   var createBody = encodeURIComponent(
 `<!-- Replace this comment with your comment/suggestion/question/... -->
 
@@ -22,6 +22,6 @@ but also helps find relevant discussions from the documentation page via the "Vi
   var discuss = {}
   discuss.createUrl =
     `https://discuss.axoniq.io/new-topic?category=${categoryName}&title=${createTitle}&body=${createBody}`
-  discuss.searchUrl = `https://discuss.axoniq.io/search?q=${pageUrl}%20%23${categoryName}`
+  discuss.searchUrl = `https://discuss.axoniq.io/search?q=${pageUrlEncoded}%20%23${categoryName}`
   return discuss
 }
