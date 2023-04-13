@@ -4,7 +4,7 @@
     {{#if (and page.fileUri (not env.CI))}}
       <a class="action" href="{{page.fileUri}}">Edit this Page</a>
     {{else if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
-      <a class="action" href="{{page.fileUri}}">Edit this Page</a>
+      <a class="action" href="{{page.editUrl}}">Edit this Page</a>
     {{/if}}
 
     {{#with (discussLink site page)}}

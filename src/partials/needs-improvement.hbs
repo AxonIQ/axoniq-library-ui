@@ -8,9 +8,11 @@
       {{/each}}
       </ul>
       <div class="improve-request">
+        {{#if (and page.editUrl (or env.FORCE_SHOW_EDIT_PAGE_LINK (not page.origin.private)))}}
+          You are welcome to <a class="action" href="{{page.editUrl}}">edit this page</a>.
+        {{/if}}
         {{#with (discussLink site page)}}
-        You are welcome to <a class="action" href="{{page.fileUri}}">edit this page</a>.
-        You can also search for and contribute to
+        You can search for and contribute to
         <a class="action" href="{{searchUrl}}" target="discuss_search">previous discussions about this page</a>
         or
         <a class="action" href="{{createUrl}}" target="discuss_add">start a new one</a>
