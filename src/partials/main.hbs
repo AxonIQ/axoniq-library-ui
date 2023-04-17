@@ -1,12 +1,14 @@
 <main class="article">
-{{> toolbar}}
-{{> needs-improvement}}
+  {{> toolbar}}
+  {{> needs-improvement}}
   <div class="content">
-{{#if (eq page.layout '404')}}
-{{> article-404}}
-{{else}}
-{{> toc}}
-{{> article}}
-{{/if}}
+    {{#if (eq page.layout '404')}}
+      {{> article-404}}
+    {{else}}
+      {{#if (ne page.attributes.layout 'redoc')}}
+        {{> toc}}
+      {{/if}}
+      {{> article}}
+    {{/if}}
   </div>
 </main>
