@@ -1,13 +1,15 @@
 {{#if (eq page.attributes.layout 'redoc')}}
     <redoc id='redoc-container'></redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.64/bundles/redoc.standalone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0/bundles/redoc.standalone.js"></script>
     <script>
-        Redoc.init('{{{page.attributes.redoc-file}}}',
-        {
-            disableSearch: true,
-            scrollYOffset: '.toolbar'
-        },
-        document.getElementById('redoc-container'))
+        Redoc.init(
+            '{{{page.attributes.redoc-file}}}',
+            {
+                disableSearch: true,
+                scrollYOffset: '.toolbar'
+            },
+            document.getElementById('redoc-container')
+        )
     </script>
 {{else}}
     <article class="doc">
