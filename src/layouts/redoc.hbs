@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+{{!--
+  Disable smooth scrolling for redoc
+  see: https://github.com/Redocly/redoc/issues/1235#issuecomment-628029181
+--}}
+<html lang="en" style="scroll-behavior: unset !important;">
   <head>
-{{> head defaultPageTitle='Untitled'}}
+    {{> head defaultPageTitle='Untitled'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
-{{> header}}
-{{> body}}
-{{> footer}}
+    {{> header}}
+    {{> body}}
+    {{> footer}}
   </body>
 </html>
