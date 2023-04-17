@@ -1,6 +1,9 @@
 ;(function () {
   'use strict'
 
+  var redoc = document.getElementsByTagName('redoc')
+  if (redoc) return
+
   var article = document.querySelector('article.doc')
   var toolbar = document.querySelector('.toolbar')
 
