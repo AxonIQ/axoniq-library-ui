@@ -47,16 +47,6 @@
             {{/each}}
           </div>
         </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="#">How-to guides</a>
-          <div class="navbar-dropdown">
-            {{#each site.components }}
-              {{#if (eq this.asciidoc.attributes.type 'howto')}}
-                <a class="navbar-item" href="{{{relativize this.url}}}">{{this.title}}</a>
-              {{/if}}
-            {{/each}}
-          </div>
-        </div>
         <a class="navbar-item" href="https://academy.axoniq.io" target="_blank">AxonIQ Academy</a>
         <a class="navbar-item" href="https://discuss.axoniq.io" target="_blank">Discuss</a>
       </div>
