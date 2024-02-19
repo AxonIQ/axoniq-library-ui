@@ -18,10 +18,10 @@
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">References</a>
+          <a class="navbar-link">Documentation</a>
           <div class="navbar-dropdown">
             {{#each site.components }}
-              {{#if (eq this.asciidoc.attributes.type 'reference')}}
+              {{#if (eq this.asciidoc.attributes.type 'documentation')}}
                 <a class="navbar-item" href="{{{relativize this.url}}}">{{this.title}}</a>
               {{/if}}
             {{/each}}
