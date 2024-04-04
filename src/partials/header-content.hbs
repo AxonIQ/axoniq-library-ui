@@ -17,16 +17,12 @@
     </div>
     <div id="topbar-nav" class="navbar-menu">
       <div class="navbar-end">
-        {{!-- TODO: replace hard-coded reference to Basics page with dynamic filter that selects the component home::basics.adoc --}}
-        <a class="navbar-item" href="/home/basics.html">Basics</a>
+        <a class="navbar-item" href="{{relativize (resolveComponentReference site.components 'home' 'Basics')}}">Basics</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Guides</a>
           <div class="navbar-dropdown">
-            {{#each site.components }}
-              {{#if (or (eq this.asciidoc.attributes.type 'guide') 
-                        (and (eq this.asciidoc.attributes.type 'tutorial') (eq this.asciidoc.attributes.group 'advanced'))) }}
-                <a class="navbar-item" href="{{{relativize this.url}}}">{{this.title}}</a>
-              {{/if}}
+            {{#each (resolveComponentNavigation site.components 'home' 'Guides')}}
+              <a class="navbar-item" href="{{relativize this.url}}">{{this.content}}</a>
             {{/each}}
           </div>
         </div>
