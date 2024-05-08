@@ -2,6 +2,12 @@
 
 module.exports = (type, groupsText, components) => {
   //console.log('Type is: ' + type)
+  var typesArray = []
+  if (type && type.includes(',')) {
+    typesArray = type.split(',').map((value) => value.trim())
+  } else {
+    typesArray = [type]
+  }
   //console.log('Groups is: ' + groupsText)
   //console.log('Components is: ' + JSON.stringify(components))
   //console.log('---')
@@ -14,9 +20,8 @@ module.exports = (type, groupsText, components) => {
   }
 
   for (var component in components) {
-    //console.log('Component: ' + component)
     var componentType = components[component].asciidoc.attributes.type
-    if (componentType === type) {
+    if (typesArray.includes(componentType)) {
       var componentGroup = components[component].asciidoc.attributes.group
       if (componentGroup === undefined) {
         componentGroup = ''
