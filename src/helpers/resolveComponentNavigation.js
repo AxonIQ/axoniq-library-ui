@@ -5,7 +5,7 @@ module.exports = (components, componentName, contentName) => {
 
   if (components[componentName]) {
     var component = components[componentName]
-    if (contentName) {
+    if (contentName && component.latest.navigation) {
       var contentMenu = findContentInNavigation(component.latest.navigation, contentName)
       if (contentMenu) resolvedNav = contentMenu
     } else {
