@@ -45,7 +45,7 @@
   --link-font-color: var(--color-peacock);
   --link_hover-font-color: var(--color-peacock);
   --toc-border-color: var(--color-mouse);
-  --heading-font-color: var(--color-gecko);
+  --heading-font-color: var(--color-black);
   --heading-font-weight: 300;
   --alt-heading-font-weight: 300;
 }
