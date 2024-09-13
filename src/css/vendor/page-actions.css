@@ -24,7 +24,7 @@
 }
 
 .page-actions .actions-menu {
-  display: flex;
+  /*display: flex;
   min-width: 100%;
   flex-direction: column;
   align-items: flex-end;
@@ -34,7 +34,7 @@
   top: 0;
   right: 0;
   white-space: nowrap;
-  border: 1px solid var(--color-gecko);
+  border: 1px solid var(--color-gecko);*/
 }
 
 .page-actions:not(.is-active) .actions-menu {
@@ -42,12 +42,12 @@
 }
 
  .page-actions .action {
-  display: block;
+  /*display: block;
   border-top: 1px solid var(--color-elephant);
   width: 100%;
   text-align: right;
   padding-top: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem;*/
 }
 /*
 .page-actions .version.is-current {

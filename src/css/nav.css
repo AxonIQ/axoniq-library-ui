@@ -43,10 +43,12 @@
 
 @media screen and (min-width: 1024px) {
   .nav {
-    top: var(--navbar-height);
+    top: calc(var(--navbar-height) + 64px);
+    padding: 1rem;
     box-shadow: none;
     position: sticky;
-    height: var(--nav-height--desktop);
+    height: fit-content;
+    max-height: calc(100vh - (var(--navbar-height) + 104px));
   }
 }
 

@@ -25,6 +25,9 @@ body {
   margin: 0;
   tab-size: 4;
   word-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {

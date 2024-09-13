@@ -21,6 +21,7 @@
   --color-pale-duckling: #f7efba;
 
   /* Axon greys colors */
+  --color-dove: #fff;
   --color-seal: #f5f6f6;
   --color-mouse: #ecedee;
   --color-elephant: #a1a4aa;
@@ -33,19 +34,21 @@
   --body-font-weight-bold: 700;
   --panel-background: var(--color-seal);
   --panel-border-color: var(--color-gecko);
-  --navbar-background: var(--color-white);
+  --navbar-background: var(--color-dove);
   --navbar-font-color: var(--color-ox);
-  --navbar_hover-background: var(--color-seal);
-  --navbar-menu_hover-background: var(--color-seal);
+  --navbar_hover-background: var(--color-dove);
+  --navbar_button-background: var(--color-gecko);
+  --navbar_button-foreground: var(--color-dove);
+  --navbar-menu_hover-background: var(--color-dove);
   --page-version-menu-background: var(--color-seal);
   --quote-border-color: var(--color-gecko);
   --footer-background: var(--color-rhino);
   --footer-font-color: var(--color-seal);
-  --footer-link-font-color: var(--color-white);
+  --footer-link-font-color: var(--color-dove);
   --link-font-color: var(--color-peacock);
   --link_hover-font-color: var(--color-peacock);
   --toc-border-color: var(--color-mouse);
-  --heading-font-color: var(--color-black);
+  --heading-font-color: var(--color-ox);
   --heading-font-weight: 300;
   --alt-heading-font-weight: 300;
 }

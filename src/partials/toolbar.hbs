@@ -1,9 +1,9 @@
-<div class="toolbar" role="navigation">
+<div class="toolbar card" role="navigation">
 {{> nav-toggle}}
   {{#with site.homeUrl}}
   <a href="{{{relativize this}}}" class="home-link{{#if @root.page.home}} is-current{{/if}}"></a>
   {{/with}}
 {{> breadcrumbs}}
-{{> page-versions}}
 {{> page-actions}}
+{{> page-versions}}
 </div>

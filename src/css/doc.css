@@ -3,16 +3,17 @@
   font-size: var(--doc-font-size);
   hyphens: auto;
   line-height: var(--doc-line-height);
-  margin: var(--doc-margin);
+  /* margin: var(--doc-margin); */
   max-width: var(--doc-max-width);
   padding: 0 1rem 4rem;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 1024px) {
   .doc {
     flex: auto;
     font-size: var(--doc-font-size--desktop);
-    margin: var(--doc-margin--desktop);
+    /* margin: var(--doc-margin--desktop); */
     max-width: var(--doc-max-width--desktop);
     min-width: 0;
   }
@@ -55,21 +56,24 @@
   margin-top: 2rem;
 }
 
-.doc h1.sect0 {
-  background: var(--abstract-background);
-  font-size: 1.8em;
-  margin: 1.5rem -1rem 0;
-  padding: 0.5rem 1rem;
+.doc h1 {
+  font-size: 2em;
+  font-weight: 900;
+  margin: 1.5rem 0 0;
 }
 
 .doc h2:not(.discrete) {
-  border-bottom: 1px solid var(--section-divider-color);
-  margin-left: -1rem;
-  margin-right: -1rem;
-  padding: 0.4rem 1rem 0.1rem;
+  padding: 1rem 0 0.1rem;
+  font-size: 1.8rem;
+  color: var(--color-gecko);
 }
 
-.doc h3:not(.discrete),
+.doc h3:not(.discrete) {
+  padding: 1rem 0 0.1rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
 .doc h4:not(.discrete) {
   font-weight: var(--alt-heading-font-weight);
 }

@@ -1,14 +1,7 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="{{{or site.url siteRootPath}}}">{{site.title}}</a>
-      {{#if env.SITE_SEARCH_PROVIDER}}
-      <div class="navbar-item search hide-for-print">
-        <div id="search-field" class="field">
-          <input id="search-input" type="text" placeholder="Search the docs"{{#if page.home}} autofocus{{/if}}>
-        </div>
-      </div>
-      {{/if}}
+      <a class="navbar-item" href="{{{or site.url siteRootPath}}}"><object data="{{uiRootPath}}/img/logo-dark.svg" class="header_logo"></object></a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -20,7 +13,7 @@
         <a class="navbar-item" href="{{relativize (resolveComponentReference site.components 'home' 'Basics')}}">Basics</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Guides</a>
-          <div class="navbar-dropdown">
+          <div class="navbar-dropdown card">
             {{#each (resolveComponentNavigation site.components 'home' 'Guides')}}
               <a class="navbar-item" href="{{relativize this.url}}">{{this.content}}</a>
             {{/each}}
@@ -28,7 +21,7 @@
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">Reference</a>
-          <div class="navbar-dropdown">
+          <div class="navbar-dropdown card">
             {{#each site.components }}
               {{#if (eq this.asciidoc.attributes.type 'reference')}}
                 <a class="navbar-item" href="{{{relativize this.url}}}">{{this.title}}</a>
@@ -36,8 +29,17 @@
             {{/each}}
           </div>
         </div>
-        <a class="navbar-item" href="https://academy.axoniq.io" target="_blank">AxonIQ Academy</a>
-        <a class="navbar-item" href="https://discuss.axoniq.io" target="_blank">AxonIQ Discuss</a>
+      </div>
+      <div class="navbar-end">
+        {{#if env.SITE_SEARCH_PROVIDER}}
+        <div class="navbar-item search hide-for-print">
+          <div id="search-field" class="field">
+            <input id="search-input" type="text" placeholder="Search AxonIQ Docs"{{#if page.home}} autofocus{{/if}}>
+          </div>
+        </div>
+        {{/if}}
+        <a class="navbar-item navbar-button" href="https://academy.axoniq.io" target="_blank">AxonIQ Academy</a>
+        <a class="navbar-item navbar-button" href="https://discuss.axoniq.io" target="_blank">AxonIQ Discuss</a>
       </div>
     </div>
   </nav>

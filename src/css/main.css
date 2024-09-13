@@ -12,6 +12,7 @@
   main {
     flex: auto;
     min-width: 0; /* min-width: 0 required for flexbox to constrain overflowing elements */
+    display: flex;
   }
 
   main > .content {

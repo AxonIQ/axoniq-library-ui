@@ -5,7 +5,7 @@
 .toc.sidebar .toc-menu {
   margin-right: 0.75rem;
   position: sticky;
-  top: var(--toc-top);
+  top: calc(var(--navbar-height) + 88px);
 }
 
 .toc .toc-menu h3 {

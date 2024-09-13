@@ -1,3 +1,8 @@
+main.article {
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .nav-panel-menu .versions {
   display: flex;
   flex-wrap: wrap;
@@ -5,6 +10,11 @@
   margin-top: -0.25rem;
   line-height: 1;
   list-style: none;
+}
+
+.card {
+  box-shadow: 6px 7px 14px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1.25rem;
 }
 
 .nav-panel-menu .version {
@@ -46,15 +56,9 @@
   .navbar-end .navbar-item.has-dropdown:hover .navbar-link,
   .navbar-end .navbar-link:hover,
   .navbar-end > a.navbar-item:hover {
-    border: 1px solid var(--navbar-menu-border-color);
-    border-bottom: 1px solid var(--color-white);
-    top: 1px;
     position: relative;
     z-index: 2;
-  }
-
-  .navbar-dropdown {
-    border-top: 1px solid var(--navbar-menu-border-color);
+    cursor: pointer;
   }
 }
 
@@ -85,19 +89,6 @@
   font-size: 10px;
   color: var(--color-seal);
   opacity: 0.6;
-}
-
-.page-versions .version-menu {
-  border: 1px solid var(--color-gecko);
-}
-
-.page-versions .version {
-  display: block;
-  border-top: 1px solid var(--color-elephant);
-  width: 100%;
-  text-align: right;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
 }
 
 .doc .admonitionblock .icon i::after {
@@ -156,11 +147,11 @@
 }
 
 .needs-improvement {
-  background-color: lightyellow;
-  color: goldenrod;
+  background-color: var(--color-pale-duckling);
+  color: var(--color-ox);
   padding: 0;
   padding-bottom: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 2rem 2rem 0 2rem;
   display: flex;
   align-items: center;
 }
@@ -187,4 +178,18 @@
 
 .needs-improvement .improve-request {
   font-size: small;
+}
+
+aside.nav {
+  overflow-y: auto;
+}
+
+@media (max-width: 820px) {
+  .primary-footer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+    gap: 19px;
+    justify-content: center;
+  }
 }

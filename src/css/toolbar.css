@@ -1,13 +1,16 @@
 .toolbar {
   color: var(--toolbar-font-color);
   align-items: center;
-  background-color: var(--toolbar-background);
-  box-shadow: 0 1px 0 var(--toolbar-border-color);
+  background-color: var(--color-seal);
   display: flex;
   font-size: calc(15 / var(--rem-base) * 1rem);
   height: var(--toolbar-height);
+  max-width: 1296px;
+  width: calc(100% - 16px);
   justify-content: flex-start;
   position: sticky;
+  margin: 0 auto;
+  padding: 0 0 0 8px;
   top: var(--navbar-height);
   z-index: var(--z-index-toolbar);
 }
@@ -26,6 +29,34 @@
   height: var(--toolbar-height);
   width: var(--toolbar-height);
   margin-right: -0.25rem;
+}
+
+.toolbar_dropdown_menu {
+  display: inline-block;
+  min-width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: var(--color-dove);
+  padding: 1.75rem 1.6rem 1.5rem 1.5rem;
+  position: absolute;
+  top: -0.3rem;
+  left: -1rem;
+  white-space: nowrap;
+  border: 0 hidden;
+}
+
+.toolbar_dropdown_menu .item {
+  display: block;
+  border-top: 1px solid var(--color-seal);
+  width: 100%;
+  text-align: left;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.page-actions.is-active,
+.page-versions.is-active {
+  z-index: 10;
 }
 
 @media screen and (min-width: 1024px) {

@@ -7,7 +7,9 @@
   var selector = document.querySelector('.page-versions')
 
   toggle.addEventListener('click', function (e) {
+    var actives = document.querySelectorAll('.toolbar .is-active')
     selector.classList.toggle('is-active')
+    actives.forEach((item) => { item.classList.remove('is-active') })
     e.stopPropagation() // trap event
   })
 
