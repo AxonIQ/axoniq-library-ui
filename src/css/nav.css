@@ -67,7 +67,7 @@ html.is-clipped--nav {
 }
 
 .nav-panel-menu {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   overscroll-behavior: none;
   height: var(--nav-panel-menu-height);
 }

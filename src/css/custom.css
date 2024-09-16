@@ -193,3 +193,7 @@ aside.nav {
     justify-content: center;
   }
 }
+
+*[id] {
+  scroll-margin-top: 100px;
+}
