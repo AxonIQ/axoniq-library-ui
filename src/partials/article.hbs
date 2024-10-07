@@ -3,7 +3,7 @@
     <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0/bundles/redoc.standalone.js"></script>
     <script>
         Redoc.init(
-            '{{{page.attributes.redoc-file}}}',
+            '{{{relativize page.attributes.redoc-file}}}',
             {
                 disableSearch: true,
                 scrollYOffset: '.toolbar'
