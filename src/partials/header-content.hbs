@@ -12,15 +12,14 @@
       <div class="navbar-end">
         <a class="navbar-item" href="{{relativize (resolveComponentReference site.components 'home' 'Basics')}}">Basics</a>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">Guides</a>
+          <a class="navbar-link" href="{{relativize (resolveComponentReference site.components 'home' 'Guides')}}">Guides</a>
           <div class="navbar-dropdown card">
-            {{#each (resolveComponentNavigation site.components 'home' 'Guides')}}
-              <a class="navbar-item" href="{{relativize this.url}}">{{this.content}}</a>
-            {{/each}}
+            <a class="navbar-item" href="{{{relativize '/home/guides/axon-framework'}}}">Axon Framework</a>
+            <a class="navbar-item" href="{{{relativize '/home/guides/axon-server'}}}">Axon Server</a>
           </div>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">Reference</a>
+          <a class="navbar-link" href="{{relativize (resolveComponentReference site.components 'home' 'Reference Guides')}}">Reference</a>
           <div class="navbar-dropdown card">
             {{#each site.components }}
               {{#if (eq this.asciidoc.attributes.type 'reference')}}
