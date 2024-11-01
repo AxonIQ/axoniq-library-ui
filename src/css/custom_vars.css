@@ -49,6 +49,6 @@
   --link_hover-font-color: var(--color-peacock);
   --toc-border-color: var(--color-mouse);
   --heading-font-color: var(--color-ox);
-  --heading-font-weight: 300;
-  --alt-heading-font-weight: 300;
+  --heading-font-weight: 400;
+  --alt-heading-font-weight: 400;
 }

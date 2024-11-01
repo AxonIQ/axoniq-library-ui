@@ -17,6 +17,8 @@
 
   main > .content {
     display: flex;
+    gap: 24px;
+    justify-content: flex-start;
   }
 
   aside.toc.embedded {
