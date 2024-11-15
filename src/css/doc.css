@@ -4,9 +4,11 @@
   hyphens: auto;
   line-height: var(--doc-line-height);
   /* margin: var(--doc-margin); */
-  max-width: var(--doc-max-width);
-  padding: 0 1rem 4rem;
-  margin: 0 auto;
+  max-width: 746px;
+  width: 100%;
+  /* padding: 0 0 4rem; */
+  padding: 0 8px;
+  margin: 0;
 }
 
 @media screen and (min-width: 1024px) {
@@ -65,7 +67,7 @@
 .doc h2:not(.discrete) {
   padding: 1rem 0 0.1rem;
   font-size: 1.8rem;
-  color: var(--color-gecko);
+  color: var(--color-ox);
 }
 
 .doc h3:not(.discrete) {
@@ -875,6 +877,10 @@
 
 .doc .language-console .hljs-meta {
   user-select: none;
+}
+
+dd {
+  margin-inline-start: 0;
 }
 
 .doc .dlist dt {
