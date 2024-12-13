@@ -1,8 +1,10 @@
 <div class="nav-container"{{#if page.component}} data-component="{{page.component.name}}" data-version="{{page.version}}"{{/if}}>
-  <aside class="nav card">
-    <div class="panels">
-{{> nav-menu }}
-{{!-- {{> nav-explore}} --}}
-    </div>
-  </aside>
+  {{#if page.navigation}}
+    <aside class="nav card">
+      <div class="panels">
+        {{> nav-menu }}
+        {{!-- {{> nav-explore}} --}}
+      </div>
+    </aside>
+  {{/if}}
 </div>
