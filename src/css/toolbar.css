@@ -9,10 +9,10 @@
   width: calc(100% - 16px);
   justify-content: flex-start;
   position: sticky;
+  top: 100px;
   margin: 0 auto;
   padding: 0 0 0 8px;
-  top: var(--navbar-height);
-  z-index: var(--z-index-toolbar);
+  /* z-index: var(--z-index-toolbar); */
 }
 
 .toolbar a {
