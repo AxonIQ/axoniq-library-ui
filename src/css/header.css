@@ -2,17 +2,12 @@ html.is-clipped--navbar {
   overflow-y: hidden;
 }
 
-body {
-  padding-top: var(--navbar-height);
-}
-
 .navbar {
   background: var(--navbar-background);
   color: var(--navbar-font-color);
   font-size: calc(16 / var(--rem-base) * 1rem);
   height: var(--navbar-height);
-  position: fixed;
-  top: 0;
+  position: relative;
   width: 100%;
   z-index: var(--z-index-navbar);
 }
