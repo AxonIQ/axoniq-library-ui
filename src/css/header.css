@@ -1,3 +1,7 @@
+header {
+  z-index: 10;
+}
+
 html.is-clipped--navbar {
   overflow-y: hidden;
 }

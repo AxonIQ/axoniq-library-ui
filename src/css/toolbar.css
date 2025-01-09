@@ -8,11 +8,9 @@
   max-width: 1296px;
   width: calc(100% - 16px);
   justify-content: flex-start;
-  position: sticky;
-  top: 100px;
-  margin: 0 auto;
+  margin: 8px auto 0;
   padding: 0 0 0 8px;
-  /* z-index: var(--z-index-toolbar); */
+  z-index: 8;
 }
 
 .toolbar a {
