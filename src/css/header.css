@@ -1,3 +1,7 @@
+header {
+  z-index: 10;
+}
+
 html.is-clipped--navbar {
   overflow-y: hidden;
 }
@@ -162,10 +166,16 @@ input#search-input:disabled {
   border: 0 hidden;
   border-radius: 20px;
   box-shadow: 6px 7px 14px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-  display: block;
+  display: inline-block;
   line-height: 100%;
   padding: 0.5rem 1rem;
   font-weight: 900;
+  text-decoration: none;
+}
+
+.navbar-item.navbar-button:hover {
+  color: var(--color-ox);
+  text-decoration: none;
 }
 
 .navbar-link {

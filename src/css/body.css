@@ -1,11 +1,11 @@
-@media screen and (min-width: 1024px) {
-  .body {
-    display: flex;
-    margin: 0 auto 48px;
-    max-width: 1296px;
-    width: 100%;
-    flex-direction: row;
-    flex-grow: 2;
-    gap: 24px;
-  }
+.body {
+  display: flex;
+  align-items: flex-start;
+  margin: 0 auto 48px;
+  max-width: 1296px;
+  width: 100%;
+  flex-direction: row;
+  flex-grow: 1;
+  gap: 24px;
+  padding: 0;
 }
