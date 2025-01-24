@@ -54,7 +54,8 @@
 
   window.addEventListener('load', function () {
     onScroll()
-    window.addEventListener('scroll', onScroll)
+    //window.addEventListener('scroll', onScroll)
+    document.querySelector('.content_container').addEventListener('scroll', onScroll)
   })
 
   function onScroll () {
