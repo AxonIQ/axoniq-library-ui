@@ -3,7 +3,7 @@
   font-size: var(--doc-font-size);
   hyphens: auto;
   line-height: var(--doc-line-height);
-  max-width: 746px;
+  max-width: min(746px, calc(100vw - 64px));
   width: 100%;
   padding: 0 8px;
   margin: 0;
@@ -13,7 +13,6 @@
   .doc {
     flex: auto;
     font-size: var(--doc-font-size--desktop);
-    /* margin: var(--doc-margin--desktop); */
     max-width: var(--doc-max-width--desktop);
     min-width: 0;
   }
