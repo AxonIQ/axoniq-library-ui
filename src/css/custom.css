@@ -10,6 +10,7 @@ main.article {
   display: flex;
   flex-direction: column;
   scrollbar-gutter: stable both-edges;
+  scroll-behavior: smooth;
 }
 
 .nav-panel-menu .versions {
@@ -229,8 +230,4 @@ aside.nav {
     gap: 19px;
     justify-content: center;
   }
-}
-
-*[id] {
-  scroll-margin-top: 100px;
 }
