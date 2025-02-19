@@ -3,7 +3,7 @@
   font-size: var(--doc-font-size);
   hyphens: auto;
   line-height: var(--doc-line-height);
-  max-width: min(746px, calc(100vw - 64px));
+  max-width: min(746px, 100vw);
   width: 100%;
   padding: 0 8px;
   margin: 0;
@@ -238,6 +238,8 @@
 
 .doc table.tableblock {
   font-size: calc(15 / var(--rem-base) * 1rem);
+  display: block;
+  overflow-x: auto;
 }
 
 .doc > table.tableblock,
