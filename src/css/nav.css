@@ -1,14 +1,19 @@
 .nav-container {
   font-size: calc(17 / var(--rem-base) * 1rem);
   z-index: var(--z-index-nav);
-  visibility: hidden;
-  position: sticky;
-  top: 2.5rem;
+  position: absolute;
+  top: 1rem;
+  transform: translateX(-100vw);
+  transition: transform 0.3s ease-in-out;
 }
 
 @media screen and (min-width: 769px) {
   .nav-container {
+    transform: none;
+    position: sticky;
     width: var(--nav-width);
+    top: 2.5rem;
+    display: block;
   }
 }
 
@@ -21,7 +26,11 @@
 }
 
 .nav-container.is-active {
-  visibility: visible;
+  transform: none;
+}
+
+.nav-container.is-active .nav {
+  border-radius: 0 1.25rem 0 0;
 }
 
 .nav {
