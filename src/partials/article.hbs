@@ -14,7 +14,10 @@
 {{else}}
     <article class="doc">
         {{#with page.title}}
-            <h1 class="page">{{{this}}}</h1>
+            {{#if (eq page.ingore-h1 'true')}}
+            {{else}}
+                <h1 class="page">{{{this}}}</h1>
+            {{/if}}
         {{/with}}
         {{#if (eq page.attributes.layout 'page-list')}}
             {{> page-list}}
