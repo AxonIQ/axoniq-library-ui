@@ -4,9 +4,11 @@
     {{> head defaultPageTitle='Untitled'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
-    {{> banner}}
-    {{> header}}
-    {{> toolbar}}
+    <div class="header_container">
+      {{> banner}}
+      {{> header}}
+      {{> toolbar}}
+    </div>
     <div class="content_container">
       {{> body}}
       {{> footer}}

@@ -4,7 +4,9 @@
 {{> head defaultPageTitle='Untitled'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
-{{> header}}
+    <div class="header_container">
+      {{> header}}
+    </div>
 {{{jsonStringify site}}}
 {{> footer}}
   </body>
