@@ -12,7 +12,7 @@
     transform: none;
     position: sticky;
     width: var(--nav-width);
-    top: 2.5rem;
+    top: 180px;
     display: block;
   }
 }
@@ -48,10 +48,8 @@
 
 @media screen and (min-width: 1024px) {
   .nav {
-    top: calc(var(--navbar-height) + 64px);
     padding: 1rem;
     box-shadow: none;
-    position: sticky;
     height: fit-content;
     max-height: calc(100vh - (var(--navbar-height) + 104px));
   }

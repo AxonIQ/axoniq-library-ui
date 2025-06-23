@@ -17,11 +17,8 @@ body {
   padding: 0;
   tab-size: 4;
   word-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
-  height: 100%;
-  display: flex;
-  position: fixed;
-  width: 100%;
-  flex-direction: column;
+  height: fit-content;
+  scroll-behavior: smooth;
   font-size: 18px;
 }
 
