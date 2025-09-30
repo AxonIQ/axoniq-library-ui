@@ -238,7 +238,9 @@
 
 .doc table.tableblock {
   font-size: calc(15 / var(--rem-base) * 1rem);
-  display: block;
+  width: 100%;
+  table-layout: auto;
+  display: table;
   overflow-x: auto;
 }
 

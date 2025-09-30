@@ -7,7 +7,7 @@ html.is-clipped--navbar {
 }
 
 .navbar {
-  background: var(--navbar-background);
+  background-image: url('../img/bg-header.png') !important; /* export the block grid from Figma */
   color: var(--navbar-font-color);
   font-size: calc(16 / var(--rem-base) * 1rem);
   height: var(--navbar-height);
@@ -18,7 +18,7 @@ html.is-clipped--navbar {
 
 .navbar a {
   text-decoration: none;
-  font-weight: 900;
+  font-weight: 500;
 }
 
 .navbar-brand {
@@ -28,8 +28,8 @@ html.is-clipped--navbar {
 }
 
 .navbar-brand .header_logo {
-  height: 40px;
-  width: auto;
+  width: 120px;
+  height: auto;
 }
 
 .navbar-brand .navbar-item {
@@ -76,7 +76,7 @@ input#search-input::placeholder {
 }
 
 input#search-input:disabled {
-  background-color: #dbdbdb;
+  background-color: #d5d7da;
   /* disable cursor */
   cursor: not-allowed;
   pointer-events: all !important;
@@ -140,7 +140,11 @@ input#search-input:disabled {
   color: var(--navbar-menu-font-color);
   display: block;
   line-height: var(--doc-line-height);
-  padding: 10px 4px 6px 0;
+  padding: 0 16px;
+}
+
+.navbar-item:not(.has-dropdown):not(.search):not(.navbar-button) {
+  padding-right: 2.5em;
 }
 
 .navbar-item .icon {
@@ -161,11 +165,10 @@ input#search-input:disabled {
 }
 
 .navbar-item.navbar-button {
-  color: var(--navbar_button-foreground);
-  background-color: var(--navbar_button-background);
+  color: #fff;
+  background-color: var(--color-primary);
   border: 0 hidden;
-  border-radius: 20px;
-  box-shadow: 6px 7px 14px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
   display: inline-block;
   line-height: 100%;
   padding: 0.5rem 1rem;
@@ -174,7 +177,6 @@ input#search-input:disabled {
 }
 
 .navbar-item.navbar-button:hover {
-  color: var(--color-ox);
   text-decoration: none;
 }
 
@@ -221,8 +223,6 @@ input#search-input:disabled {
 
 .navbar-menu {
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
 }
 
 @media screen and (max-width: 768.5px) {
@@ -259,6 +259,8 @@ input#search-input:disabled {
     overflow-y: auto;
     overscroll-behavior: none;
     padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .navbar-menu:not(.is-active) {
@@ -275,6 +277,18 @@ input#search-input:disabled {
     border-radius: 0;
   }
 
+  .navbar-center {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-end {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
   #search-input {
     width: 100%;
     margin: 0 8px;
@@ -286,16 +300,43 @@ input#search-input:disabled {
     display: none;
   }
 
-  .navbar,
-  .navbar-menu,
-  .navbar-end {
+  .navbar {
     display: flex;
+    width: 100%;
+  }
+
+  .navbar-brand {
+    flex: 1 1 0%;
+  }
+
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .navbar-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
   }
 
   .navbar-end {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
     gap: 24px;
     align-items: center;
-    padding: 0 16px;
+    display: flex;
+    pointer-events: auto;
   }
 
   .navbar-item,

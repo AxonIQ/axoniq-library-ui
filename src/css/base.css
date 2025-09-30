@@ -9,9 +9,9 @@ html {
 }
 
 body {
-  background: var(--body-background);
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
   color: var(--body-font-color);
-  font-family: var(--body-font-family);
   line-height: var(--body-line-height);
   margin: 0;
   padding: 0;
@@ -19,7 +19,26 @@ body {
   word-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
   height: fit-content;
   scroll-behavior: smooth;
-  font-size: 18px;
+}
+
+body.article.component-list {
+  background-color: var(--color-white); /* fallback */
+  background-image: url('../img/blocks.png'), url('../img/bg.png'); /* overlay to soften blocks, then blocks, then bg */
+  /* Top layer (white overlay) should cover; blocks should repeat; bg should cover */
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100vw 100vh, 100vw 100vh;
+  background-position: center 65px, center;
+  background-attachment: fixed, fixed; /* overlay + blocks scroll, bg fixed */
+  /* Blend the two layers together: overlay uses normal (covers softly), blocks multiply with bg */
+  background-blend-mode: normal;
+  min-height: 100vh;
+
+  .doc {
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: white 0 0 0;
+    border-radius: 12px;
+    padding: 0 16px;
+  }
 }
 
 a {

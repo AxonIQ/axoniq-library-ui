@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('../font/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../font/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 .body {
   display: flex;
   align-items: flex-start;

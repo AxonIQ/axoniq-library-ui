@@ -1,7 +1,9 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="{{{or site.url siteRootPath}}}"><img src="{{uiRootPath}}/img/logo-dark4x.png" class="header_logo" /></a>
+      <a class="navbar-item" href="{{{or site.url siteRootPath}}}">
+        <img src="{{uiRootPath}}/img/docs-logo.png" class="header_logo"/>
+      </a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -9,7 +11,7 @@
       </button>
     </div>
     <div id="topbar-nav" class="navbar-menu">
-      <div class="navbar-end">
+      <div class="navbar-center">
         <a class="navbar-item" href="{{relativize (resolveComponentReference site.components 'home' 'Basics')}}">Basics</a>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="{{relativize (resolveComponentReference site.components 'home' 'Guides')}}">Guides</a>
@@ -31,15 +33,13 @@
       </div>
       <div class="navbar-end">
         {{#if env.SITE_SEARCH_PROVIDER}}
-        <div class="navbar-item search hide-for-print">
-          <div id="search-field" class="field">
-            <input id="search-input" type="text" placeholder="Search AxonIQ Docs"{{#if page.home}} autofocus{{/if}}>
+          <div class="navbar-item search hide-for-print">
+            <div id="search-field" class="field">
+              <input id="search-input" type="text" placeholder="Search AxonIQ Docs"{{#if page.home}} autofocus{{/if}}>
+            </div>
           </div>
-        </div>
         {{/if}}
-        <a class="navbar-item navbar-button" href="https://academy.axoniq.io" target="_blank">AxonIQ Academy</a>
-        <a class="navbar-item navbar-button" href="https://discuss.axoniq.io" target="_blank">AxonIQ Discuss</a>
-        <a class="navbar-item navbar-button" href="https://axoniq.io/contact" target="_blank">Get in touch</a>
+        <a class="navbar-item navbar-button" href="https://platform.axoniq.io" target="_blank">Axoniq Platform</a>
       </div>
     </div>
   </nav>

@@ -1,14 +1,23 @@
 :root {
+  /* Standard border color */
+  --border-color: #d5d7da;
 
-  /* Axon primary colors */
-  --color-peacock: #1374cf;
-  --color-gecko: #00b7bf;
-  --color-fox: #fe5e00;
+  /* Brand colors */
+  --color-primary: #06aed4;
+  --color-secondary: #6840c5;
+  --color-tertiary: #15b79e;
+  --color-error: #b00020;
+  --color-info: #2196f3;
+  --color-success: #12b76a;
+  --color-warning: #fb8c00;
 
-  /* Axon secondary colors */
-  --color-starling: #7f2ecd;
+  /* Legacy color names for backwards compatibility */
+  --color-peacock: var(--color-primary);
+  --color-gecko: var(--color-tertiary);
+  --color-fox: var(--color-warning);
+  --color-starling: var(--color-secondary);
   --color-flamingo: #ce37aa;
-  --color-frog: #47bf4a;
+  --color-frog: var(--color-success);
   --color-duckling: #e6d352;
 
   /* Axon tertiary colors */
@@ -33,21 +42,21 @@
   --body-font-family: "Lato", sans-serif;
   --body-font-weight-bold: 700;
   --panel-background: var(--color-seal);
-  --panel-border-color: var(--color-gecko);
+  --panel-border-color: var(--border-color);
   --navbar-background: var(--color-dove);
   --navbar-font-color: var(--color-ox);
   --navbar_hover-background: var(--color-dove);
-  --navbar_button-background: var(--color-gecko);
+  --navbar_button-background: var(--color-primary);
   --navbar_button-foreground: var(--color-dove);
   --navbar-menu_hover-background: var(--color-dove);
   --page-version-menu-background: var(--color-seal);
-  --quote-border-color: var(--color-gecko);
+  --quote-border-color: var(--color-primary);
   --footer-background: var(--color-rhino);
   --footer-font-color: var(--color-seal);
   --footer-link-font-color: var(--color-dove);
-  --link-font-color: var(--color-peacock);
-  --link_hover-font-color: var(--color-peacock);
-  --toc-border-color: var(--color-mouse);
+  --link-font-color: #088ab2;
+  --link_hover-font-color: #066d8c;
+  --toc-border-color: var(--border-color);
   --heading-font-color: var(--color-ox);
   --heading-font-weight: 400;
   --alt-heading-font-weight: 400;
