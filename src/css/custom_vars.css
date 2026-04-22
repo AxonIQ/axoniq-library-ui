@@ -1,63 +1,549 @@
+/* ============================================================
+   Genesis tokens ported for Antora UI bundle.
+   Dark gray brand. No decorative backgrounds. Light + dark.
+   ============================================================ */
+
 :root {
-  /* Standard border color */
-  --border-color: #d5d7da;
+  /* ---------- COLOR RAMPS (Tailwind v4 neutrals + accents) ---------- */
+  --color-white: rgb(255 255 255);
+  --color-black: rgb(0 0 0);
+  --color-transparent: rgb(0 0 0 / 0);
 
-  /* Brand colors */
-  --color-primary: #06aed4;
-  --color-secondary: #6840c5;
-  --color-tertiary: #15b79e;
-  --color-error: #b00020;
-  --color-info: #2196f3;
-  --color-success: #12b76a;
-  --color-warning: #fb8c00;
+  --color-neutral-50:  rgb(246 246 246);
+  --color-neutral-100: rgb(229 229 229);
+  --color-neutral-200: rgb(212 212 212);
+  --color-neutral-300: rgb(163 163 163);
+  --color-neutral-400: rgb(115 115 115);
+  --color-neutral-500: rgb(82 82 82);
+  --color-neutral-600: rgb(64 64 64);
+  --color-neutral-700: rgb(51 51 51);
+  --color-neutral-800: rgb(38 38 38);
+  --color-neutral-900: rgb(23 23 23);
+  --color-neutral-950: rgb(10 10 10);
 
-  /* Legacy color names for backwards compatibility */
+  /* Brand = dark gray (Genesis default). */
+  --color-brand-50:  var(--color-neutral-50);
+  --color-brand-100: var(--color-neutral-100);
+  --color-brand-200: var(--color-neutral-200);
+  --color-brand-300: var(--color-neutral-300);
+  --color-brand-400: var(--color-neutral-400);
+  --color-brand-500: var(--color-neutral-500);
+  --color-brand-600: var(--color-neutral-600);
+  --color-brand-700: var(--color-neutral-700);
+  --color-brand-800: var(--color-neutral-800);
+  --color-brand-900: var(--color-neutral-900);
+  --color-brand-950: var(--color-neutral-950);
+
+  --color-red-50:  #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+  --color-red-950: #450a0a;
+
+  --color-green-50:  #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+  --color-green-950: #052e16;
+
+  --color-yellow-50:  #fefce8;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-yellow-700: #a16207;
+  --color-yellow-800: #854d0e;
+  --color-yellow-900: #713f12;
+  --color-yellow-950: #422006;
+
+  --color-blue-50:  #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-blue-950: #172554;
+
+  --color-orange-50:  #fff7ed;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-orange-700: #c2410c;
+
+  --color-purple-500: #a855f7;
+  --color-purple-600: #9333ea;
+
+  /* ---------- SEMANTIC TOKENS (light) ---------- */
+
+  /* Text */
+  --color-text-primary:       var(--color-neutral-900);
+  --color-text-secondary:     var(--color-neutral-700);
+  --color-text-tertiary:      var(--color-neutral-600);
+  --color-text-quaternary:    var(--color-neutral-500);
+  --color-text-placeholder:   var(--color-neutral-400);
+  --color-text-brand-primary: var(--color-brand-900);
+  --color-text-white:         var(--color-white);
+  --color-text-error:         var(--color-red-600);
+  --color-text-warning:       var(--color-yellow-700);
+  --color-text-success:       var(--color-green-700);
+
+  /* Background */
+  --color-bg-primary:         var(--color-white);
+  --color-bg-secondary:       var(--color-neutral-50);
+  --color-bg-tertiary:        var(--color-neutral-100);
+  --color-bg-hover:            rgb(0 0 0 / 0.04);
+  --color-bg-active:           rgb(0 0 0 / 0.06);
+  --color-bg-brand-solid:     var(--color-neutral-900);
+  --color-bg-brand-solid_hover: var(--color-neutral-800);
+  --color-bg-overlay:          rgb(10 10 10 / 0.6);
+  --color-bg-kbd:              var(--color-white);
+
+  /* Border */
+  --color-border-primary:     var(--color-neutral-200);
+  --color-border-secondary:   var(--color-neutral-100);
+  --color-border-tertiary:    rgb(0 0 0 / 0.06);
+  --color-border-strong:      var(--color-neutral-300);
+  --color-border-brand:       var(--color-neutral-900);
+
+  /* Foreground icon colors */
+  --color-fg-primary:         var(--color-neutral-900);
+  --color-fg-secondary:       var(--color-neutral-700);
+  --color-fg-tertiary:        var(--color-neutral-500);
+  --color-fg-quaternary:      var(--color-neutral-400);
+
+  /* Accent / focus */
+  --color-focus-ring:         var(--color-neutral-900);
+  --color-link:               var(--color-neutral-900);
+  --color-link_hover:         var(--color-neutral-700);
+
+  /* Admonition accents — keep colored to preserve meaning, desaturate bg */
+  --color-admon-note-fg:      var(--color-blue-600);
+  --color-admon-note-bg:      var(--color-blue-50);
+  --color-admon-tip-fg:       var(--color-green-600);
+  --color-admon-tip-bg:       var(--color-green-50);
+  --color-admon-warning-fg:   var(--color-yellow-700);
+  --color-admon-warning-bg:   var(--color-yellow-50);
+  --color-admon-caution-fg:   var(--color-orange-600);
+  --color-admon-caution-bg:   var(--color-orange-50);
+  --color-admon-important-fg: var(--color-red-600);
+  --color-admon-important-bg: var(--color-red-50);
+
+  /* ---------- RADII ---------- */
+  --radius-none: 0px;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-2xl:  16px;
+  --radius-full: 9999px;
+
+  /* ---------- SHADOWS (Genesis) ---------- */
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.10), 0 1px 2px -1px rgb(0 0 0 / 0.10);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 12px 16px -4px rgb(0 0 0 / 0.08), 0 4px 6px -2px rgb(0 0 0 / 0.03);
+  --shadow-xl: 0 20px 24px -4px rgb(0 0 0 / 0.08), 0 8px 8px -4px rgb(0 0 0 / 0.03);
+  --shadow-2xl: 0 24px 48px -12px rgb(0 0 0 / 0.18), 0 4px 4px -2px rgb(0 0 0 / 0.04);
+
+  /* ---------- TYPOGRAPHY (Genesis scale) ---------- */
+  --font-body:    "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono:    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --text-xs:   12px; --text-xs--line-height:   18px;
+  --text-sm:   14px; --text-sm--line-height:   20px;
+  --text-md:   16px; --text-md--line-height:   24px;
+  --text-lg:   18px; --text-lg--line-height:   28px;
+  --text-xl:   20px; --text-xl--line-height:   30px;
+  --text-display-xs: 24px; --text-display-xs--line-height: 32px; --text-display-xs--letter-spacing: -0.24px;
+  --text-display-sm: 30px; --text-display-sm--line-height: 38px; --text-display-sm--letter-spacing: -0.4px;
+  --text-display-md: 36px; --text-display-md--line-height: 44px; --text-display-md--letter-spacing: -0.72px;
+  --text-display-lg: 48px; --text-display-lg--line-height: 60px; --text-display-lg--letter-spacing: -0.96px;
+
+  /* ---------- LAYOUT ---------- */
+  --max-width-content: 768px;
+  --max-width-container: 1440px;
+  --navbar-height: 64px;
+  --toolbar-height: 0px; /* hidden; using simplified header */
+  --nav-width: 280px;
+  --toc-width: 232px;
+  --page-gutter: 32px;
+
+  /* ---------- MOTION ---------- */
+  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-med:  200ms;
+
+  /* ============================================================
+     REMAP: Antora's existing variables → Genesis semantic tokens.
+     Anything else in the original CSS keeps working.
+     ============================================================ */
+  --body-font-family: var(--font-body);
+  --body-font-color: var(--color-text-secondary);
+  --body-font-size: 16px;
+  --body-font-size--desktop: 16px;
+  --body-font-size--print: 14px;
+  --body-line-height: 1.6;
+  --body-background: var(--color-bg-primary);
+  --body-font-weight-bold: 600;
+
+  --monospace-font-family: var(--font-mono);
+  --monospace-font-weight-bold: 600;
+
+  --panel-background: var(--color-bg-secondary);
+  --panel-border-color: var(--color-border-primary);
+
+  --scrollbar-track-color: transparent;
+  --scrollbar-thumb-color: var(--color-neutral-200);
+  --scrollbar_hover-thumb-color: var(--color-neutral-300);
+
+  --heading-font-color: var(--color-text-primary);
+  --heading-font-weight: 600;
+  --alt-heading-font-weight: 600;
+
+  --navbar-background: var(--color-bg-primary);
+  --navbar-font-color: var(--color-text-secondary);
+  --navbar_hover-background: var(--color-bg-hover);
+  --navbar-button-background: var(--color-bg-brand-solid);
+  --navbar-button-border-color: var(--color-border-brand);
+  --navbar-button-font-color: var(--color-text-white);
+  --navbar-menu-border-color: var(--color-border-primary);
+  --navbar-menu-background: var(--color-bg-primary);
+  --navbar-menu-font-color: var(--color-text-secondary);
+  --navbar-menu_hover-background: var(--color-bg-hover);
+  --navbar_button-background: var(--color-bg-brand-solid);
+  --navbar_button-foreground: var(--color-text-white);
+
+  --nav-background: var(--color-bg-primary);
+  --nav-border-color: var(--color-border-primary);
+  --nav-line-height: 1.5;
+  --nav-heading-font-color: var(--color-text-tertiary);
+  --nav-muted-color: var(--color-text-tertiary);
+  --nav-panel-divider-color: var(--color-border-secondary);
+  --nav-secondary-background: var(--color-bg-secondary);
+
+  --toolbar-background: var(--color-bg-primary);
+  --toolbar-border-color: var(--color-border-primary);
+  --toolbar-font-color: var(--color-text-tertiary);
+  --toolbar-muted-color: var(--color-text-quaternary);
+  --page-version-menu-background: var(--color-bg-secondary);
+  --page-version-missing-font-color: var(--color-text-quaternary);
+
+  --caution-color: var(--color-admon-caution-fg);
+  --caution-on-color: var(--color-white);
+  --important-color: var(--color-admon-important-fg);
+  --important-on-color: var(--color-white);
+  --note-color: var(--color-admon-note-fg);
+  --note-on-color: var(--color-white);
+  --tip-color: var(--color-admon-tip-fg);
+  --tip-on-color: var(--color-white);
+  --warning-color: var(--color-admon-warning-fg);
+  --warning-on-color: var(--color-white);
+
+  --doc-font-color: var(--color-text-secondary);
+  --doc-font-size: 16px;
+  --doc-font-size--desktop: 16px;
+  --doc-line-height: 1.65;
+  --doc-margin: 0 auto;
+  --doc-margin--desktop: 0 auto;
+  --section-divider-color: var(--color-border-secondary);
+
+  --link-font-color: var(--color-link);
+  --link_hover-font-color: var(--color-link_hover);
+  --link_unresolved-font-color: var(--color-text-error);
+
+  --abstract-background: var(--color-bg-secondary);
+  --abstract-font-color: var(--color-text-secondary);
+  --abstract-border-color: var(--color-border-primary);
+  --admonition-background: var(--color-bg-secondary);
+  --admonition-label-font-weight: 600;
+  --caption-font-color: var(--color-text-tertiary);
+  --caption-font-style: normal;
+  --caption-font-weight: 500;
+
+  --code-background: var(--color-bg-secondary);
+  --code-font-color: var(--color-text-primary);
+  --example-background: var(--color-bg-primary);
+  --example-border-color: var(--color-border-primary);
+  --kbd-background: var(--color-bg-kbd);
+  --kbd-border-color: var(--color-border-primary);
+  --pre-background: var(--color-bg-secondary);
+  --pre-border-color: var(--color-border-primary);
+  --pre-annotation-font-color: var(--color-text-quaternary);
+  --quote-background: transparent;
+  --quote-border-color: var(--color-border-brand);
+  --quote-font-color: var(--color-text-primary);
+  --quote-attribution-font-color: var(--color-text-tertiary);
+
+  --sidebar-background: var(--color-bg-secondary);
+  --table-border-color: var(--color-border-primary);
+  --table-stripe-background: var(--color-bg-secondary);
+  --table-footer-background: var(--color-bg-secondary);
+
+  --toc-font-color: var(--color-text-tertiary);
+  --toc-heading-font-color: var(--color-text-primary);
+  --toc-border-color: var(--color-border-secondary);
+  --toc-line-height: 1.5;
+
+  --footer-line-height: 1.6;
+  --footer-background: var(--color-bg-secondary);
+  --footer-font-color: var(--color-text-tertiary);
+  --footer-link-font-color: var(--color-text-primary);
+
+  --navbar-height: 64px;
+  --toolbar-height: 0px;
+  --drawer-height: 45px;
+  --body-top: 64px;
+  --body-min-height: calc(100vh - var(--body-top));
+  --nav-height: var(--body-min-height);
+  --nav-height--desktop: var(--body-min-height);
+  --nav-panel-menu-height: 100%;
+  --nav-panel-explore-height: 50%;
+  --nav-width: 280px;
+  --toc-top: calc(var(--body-top) + 24px);
+  --toc-height: calc(100vh - var(--toc-top) - 2rem);
+  --toc-width: 232px;
+  --toc-width--widescreen: 248px;
+  --doc-max-width: 768px;
+  --doc-max-width--desktop: 768px;
+
+  --z-index-nav: 1;
+  --z-index-toolbar: 2;
+  --z-index-page-version-menu: 3;
+  --z-index-navbar: 4;
+  --z-index-overlay: 50;
+  --z-index-modal: 60;
+
+  /* Legacy named colors from original theme (kept working) */
+  --color-primary:   var(--color-neutral-900);
+  --color-secondary: var(--color-neutral-700);
+  --color-tertiary:  var(--color-neutral-600);
+  --color-error:     var(--color-red-600);
+  --color-info:      var(--color-blue-600);
+  --color-success:   var(--color-green-600);
+  --color-warning:   var(--color-yellow-700);
+
   --color-peacock: var(--color-primary);
-  --color-gecko: var(--color-tertiary);
-  --color-fox: var(--color-warning);
+  --color-gecko:   var(--color-tertiary);
+  --color-fox:     var(--color-warning);
   --color-starling: var(--color-secondary);
-  --color-flamingo: #ce37aa;
-  --color-frog: var(--color-success);
-  --color-duckling: #e6d352;
+  --color-flamingo: var(--color-purple-600);
+  --color-frog:    var(--color-success);
+  --color-duckling: var(--color-yellow-500);
 
-  /* Axon tertiary colors */
-  --color-pale-peacock: #9ecffc;
-  --color-pale-gecko: #b6f5ed;
-  --color-pale-fox: #fbcaad;
-  --color-pale-starling: #cfccfe;
-  --color-pale-flamingo: #ffccf3;
-  --color-pale-frog: #baffbc;
-  --color-pale-duckling: #f7efba;
+  --color-pale-peacock: var(--color-neutral-100);
+  --color-pale-gecko:   var(--color-green-100);
+  --color-pale-fox:     var(--color-orange-50);
+  --color-pale-starling: var(--color-neutral-100);
+  --color-pale-flamingo: #fce7f3;
+  --color-pale-frog:    var(--color-green-50);
+  --color-pale-duckling: var(--color-yellow-50);
 
-  /* Axon greys colors */
-  --color-dove: #fff;
-  --color-seal: #f5f6f6;
-  --color-mouse: #ecedee;
-  --color-elephant: #a1a4aa;
-  --color-rhino: #434a56;
-  --color-ox: #21252b;
+  --color-dove:    var(--color-white);
+  --color-seal:    var(--color-neutral-50);
+  --color-mouse:   var(--color-neutral-100);
+  --color-elephant: var(--color-neutral-400);
+  --color-rhino:   var(--color-neutral-700);
+  --color-ox:      var(--color-neutral-900);
 
-  /* overwrite default values */
-  --font-awesome: "FontAwesome";
-  --body-font-family: "Lato", sans-serif;
-  --body-font-weight-bold: 700;
-  --panel-background: var(--color-seal);
-  --panel-border-color: var(--border-color);
-  --navbar-background: var(--color-dove);
-  --navbar-font-color: var(--color-ox);
-  --navbar_hover-background: var(--color-dove);
-  --navbar_button-background: var(--color-primary);
-  --navbar_button-foreground: var(--color-dove);
-  --navbar-menu_hover-background: var(--color-dove);
-  --page-version-menu-background: var(--color-seal);
-  --quote-border-color: var(--color-primary);
-  --footer-background: var(--color-rhino);
-  --footer-font-color: var(--color-seal);
-  --footer-link-font-color: var(--color-dove);
-  --link-font-color: #088ab2;
-  --link_hover-font-color: #066d8c;
-  --toc-border-color: var(--border-color);
-  --heading-font-color: var(--color-ox);
-  --heading-font-weight: 400;
-  --alt-heading-font-weight: 400;
+  --border-color:  var(--color-border-primary);
+  --font-awesome:  "FontAwesome";
+
+  /* original vars.css defines these — mirror so smoke/gray references resolve */
+  --color-smoke-10: var(--color-neutral-50);
+  --color-smoke-30: var(--color-neutral-50);
+  --color-smoke-50: var(--color-neutral-100);
+  --color-smoke-70: var(--color-neutral-100);
+  --color-smoke-90: var(--color-neutral-200);
+  --color-gray-10:  var(--color-neutral-200);
+  --color-gray-30:  var(--color-neutral-300);
+  --color-gray-40:  var(--color-neutral-400);
+  --color-gray-50:  var(--color-neutral-500);
+  --color-gray-70:  var(--color-neutral-600);
+  --color-jet-20:   var(--color-neutral-700);
+  --color-jet-30:   var(--color-neutral-800);
+  --color-jet-50:   var(--color-neutral-800);
+  --color-jet-70:   var(--color-neutral-900);
+  --color-jet-80:   var(--color-neutral-950);
+
+  color-scheme: light;
+}
+
+/* ---------- DARK MODE ---------- */
+
+/* Explicit toggle wins over system preference. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Flip legacy tokens that other rules still depend on */
+  --color-ox:       var(--color-neutral-50);
+  --color-rhino:    var(--color-neutral-300);
+  --color-jet-80:   var(--color-neutral-50);
+  --color-jet-70:   var(--color-neutral-100);
+  --color-jet-50:   var(--color-neutral-200);
+  --color-jet-30:   var(--color-neutral-300);
+  --color-jet-20:   var(--color-neutral-300);
+  --color-gray-70:  var(--color-neutral-400);
+  --color-gray-50:  var(--color-neutral-500);
+  --color-gray-40:  var(--color-neutral-500);
+  --color-gray-30:  var(--color-neutral-600);
+  --color-gray-10:  var(--color-neutral-700);
+  --color-smoke-90: var(--color-neutral-800);
+  --color-smoke-70: var(--color-neutral-900);
+  --color-smoke-50: var(--color-neutral-900);
+  --color-smoke-30: rgb(17 17 17);
+  --color-smoke-10: rgb(13 13 13);
+  --color-dove:     rgb(10 10 10);
+  --color-seal:     rgb(17 17 17);
+  --color-mouse:    rgb(24 24 24);
+  --color-elephant: var(--color-neutral-500);
+
+  --color-text-primary:       var(--color-neutral-50);
+  --color-text-secondary:     var(--color-neutral-200);
+  --color-text-tertiary:      var(--color-neutral-400);
+  --color-text-quaternary:    var(--color-neutral-500);
+  --color-text-placeholder:   var(--color-neutral-500);
+  --color-text-brand-primary: var(--color-neutral-50);
+
+  --color-bg-primary:         rgb(10 10 10);
+  --color-bg-secondary:       rgb(17 17 17);
+  --color-bg-tertiary:        rgb(24 24 24);
+  --color-bg-hover:            rgb(255 255 255 / 0.04);
+  --color-bg-active:           rgb(255 255 255 / 0.08);
+  --color-bg-brand-solid:     var(--color-neutral-50);
+  --color-bg-brand-solid_hover: var(--color-neutral-200);
+  --color-bg-overlay:         rgb(0 0 0 / 0.72);
+  --color-bg-kbd:             rgb(24 24 24);
+
+  --color-border-primary:     rgb(255 255 255 / 0.08);
+  --color-border-secondary:   rgb(255 255 255 / 0.06);
+  --color-border-tertiary:    rgb(255 255 255 / 0.04);
+  --color-border-strong:      rgb(255 255 255 / 0.14);
+  --color-border-brand:       var(--color-neutral-50);
+
+  --color-fg-primary:         var(--color-neutral-50);
+  --color-fg-secondary:       var(--color-neutral-200);
+  --color-fg-tertiary:        var(--color-neutral-400);
+  --color-fg-quaternary:      var(--color-neutral-500);
+
+  --color-focus-ring:         var(--color-neutral-50);
+  --color-link:               var(--color-neutral-50);
+  --color-link_hover:         var(--color-neutral-200);
+
+  --color-admon-note-bg:      rgb(30 58 138 / 0.18);
+  --color-admon-tip-bg:       rgb(20 83 45 / 0.18);
+  --color-admon-warning-bg:   rgb(113 63 18 / 0.18);
+  --color-admon-caution-bg:   rgb(124 45 18 / 0.22);
+  --color-admon-important-bg: rgb(127 29 29 / 0.22);
+  --color-admon-note-fg:      var(--color-blue-400);
+  --color-admon-tip-fg:       var(--color-green-400);
+  --color-admon-warning-fg:   var(--color-yellow-300);
+  --color-admon-caution-fg:   var(--color-orange-500);
+  --color-admon-important-fg: var(--color-red-400);
+
+  --scrollbar-thumb-color: rgb(255 255 255 / 0.12);
+  --scrollbar_hover-thumb-color: rgb(255 255 255 / 0.2);
+
+  /* Antora remaps get inverted via the token refs above. Explicit per-var: */
+  --navbar-button-background: var(--color-neutral-50);
+  --navbar-button-font-color: var(--color-neutral-950);
+  --footer-background: var(--color-bg-secondary);
+}
+
+/* System preference fallback, unless user explicitly chose light. */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+
+    /* Flip legacy tokens that other rules still depend on */
+    --color-ox:       var(--color-neutral-50);
+    --color-rhino:    var(--color-neutral-300);
+    --color-jet-80:   var(--color-neutral-50);
+    --color-jet-70:   var(--color-neutral-100);
+    --color-jet-50:   var(--color-neutral-200);
+    --color-jet-30:   var(--color-neutral-300);
+    --color-jet-20:   var(--color-neutral-300);
+    --color-gray-70:  var(--color-neutral-400);
+    --color-gray-50:  var(--color-neutral-500);
+    --color-gray-40:  var(--color-neutral-500);
+    --color-gray-30:  var(--color-neutral-600);
+    --color-gray-10:  var(--color-neutral-700);
+    --color-smoke-90: var(--color-neutral-800);
+    --color-smoke-70: var(--color-neutral-900);
+    --color-smoke-50: var(--color-neutral-900);
+    --color-smoke-30: rgb(17 17 17);
+    --color-smoke-10: rgb(13 13 13);
+    --color-dove:     rgb(10 10 10);
+    --color-seal:     rgb(17 17 17);
+    --color-mouse:    rgb(24 24 24);
+    --color-elephant: var(--color-neutral-500);
+
+    --color-text-primary:       var(--color-neutral-50);
+    --color-text-secondary:     var(--color-neutral-200);
+    --color-text-tertiary:      var(--color-neutral-400);
+    --color-text-quaternary:    var(--color-neutral-500);
+    --color-text-placeholder:   var(--color-neutral-500);
+    --color-text-brand-primary: var(--color-neutral-50);
+
+    --color-bg-primary:         rgb(10 10 10);
+    --color-bg-secondary:       rgb(17 17 17);
+    --color-bg-tertiary:        rgb(24 24 24);
+    --color-bg-hover:            rgb(255 255 255 / 0.04);
+    --color-bg-active:           rgb(255 255 255 / 0.08);
+    --color-bg-brand-solid:     var(--color-neutral-50);
+    --color-bg-brand-solid_hover: var(--color-neutral-200);
+    --color-bg-overlay:         rgb(0 0 0 / 0.72);
+    --color-bg-kbd:             rgb(24 24 24);
+
+    --color-border-primary:     rgb(255 255 255 / 0.08);
+    --color-border-secondary:   rgb(255 255 255 / 0.06);
+    --color-border-tertiary:    rgb(255 255 255 / 0.04);
+    --color-border-strong:      rgb(255 255 255 / 0.14);
+    --color-border-brand:       var(--color-neutral-50);
+
+    --color-fg-primary:         var(--color-neutral-50);
+    --color-fg-secondary:       var(--color-neutral-200);
+    --color-fg-tertiary:        var(--color-neutral-400);
+    --color-fg-quaternary:      var(--color-neutral-500);
+
+    --color-focus-ring:         var(--color-neutral-50);
+    --color-link:               var(--color-neutral-50);
+    --color-link_hover:         var(--color-neutral-200);
+
+    --color-admon-note-bg:      rgb(30 58 138 / 0.18);
+    --color-admon-tip-bg:       rgb(20 83 45 / 0.18);
+    --color-admon-warning-bg:   rgb(113 63 18 / 0.18);
+    --color-admon-caution-bg:   rgb(124 45 18 / 0.22);
+    --color-admon-important-bg: rgb(127 29 29 / 0.22);
+    --color-admon-note-fg:      var(--color-blue-400);
+    --color-admon-tip-fg:       var(--color-green-400);
+    --color-admon-warning-fg:   var(--color-yellow-300);
+    --color-admon-caution-fg:   var(--color-orange-500);
+    --color-admon-important-fg: var(--color-red-400);
+
+    --scrollbar-thumb-color: rgb(255 255 255 / 0.12);
+    --scrollbar_hover-thumb-color: rgb(255 255 255 / 0.2);
+
+    --navbar-button-background: var(--color-neutral-50);
+    --navbar-button-font-color: var(--color-neutral-950);
+    --footer-background: var(--color-bg-secondary);
+  }
 }
