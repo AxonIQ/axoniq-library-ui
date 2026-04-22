@@ -5,10 +5,8 @@
     {{> head defaultPageTitle='AxonIQ Docs'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
-    <div class="header_container">
-      {{> header}}
-    </div>
     <div class="content_container">
+      {{> topbar}}
       {{> body}}
       {{> footer}}
     </div>

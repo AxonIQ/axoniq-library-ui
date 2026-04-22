@@ -5,7 +5,9 @@
 
   var navContainer = document.querySelector('.nav-container')
   var navToggle = document.querySelector('.nav-toggle')
+  if (!navContainer || !navToggle) return
   var nav = navContainer.querySelector('.nav')
+  if (!nav) return
 
   navToggle.addEventListener('click', showNav)
   navContainer.addEventListener('click', trapEvent)

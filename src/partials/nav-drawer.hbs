@@ -1,13 +1,18 @@
 {{!--
   Persistent drawer nav — hand-authored cross-component IA.
-  See NAV_IA.md for the rationale. Real Antora URLs used throughout.
-  `data-href` is matched in JS against location.pathname to mark active + ancestors.
+  See NAV_IA.md for rationale. Real Antora URLs throughout.
+  data-href is matched in JS against location.pathname for active + ancestor marking.
 --}}
-<nav class="drawer" aria-label="Documentation navigation">
+<nav class="drawer" id="drawer" aria-label="Documentation navigation">
   <div class="drawer-header">
+    <a class="drawer-brand" href="{{{or site.url siteRootPath}}}" aria-label="AxonIQ Docs home">
+      <img src="{{uiRootPath}}/img/logo.svg" class="drawer-brand-logo" alt=""/>
+      <span class="drawer-brand-label">Docs</span>
+    </a>
+
     <button type="button" class="drawer-product" id="drawer-product" aria-haspopup="listbox" aria-expanded="false">
       <span class="drawer-product-icon" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg>
+        <img src="{{uiRootPath}}/img/af5.svg" alt=""/>
       </span>
       <span class="drawer-product-name">Axon Framework</span>
       <span class="drawer-product-chip">4.11</span>
@@ -299,4 +304,5 @@
     </section>
 
   </div>
+
 </nav>

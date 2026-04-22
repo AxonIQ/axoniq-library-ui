@@ -8,227 +8,31 @@ html, body {
   color: var(--color-text-secondary);
 }
 
-/* ---------- HEADER ---------- */
-.header_container {
-  background: var(--color-bg-primary);
-  border-bottom: 1px solid var(--color-border-secondary);
-  box-shadow: none;
-  position: sticky;
-  top: 0;
-  z-index: 90000;
+/* Layout: no top header, drawer flush-left, content centered */
+:root {
+  --navbar-height: 0px;
+  --nav-width: 288px;
+  --toc-width: 240px;
+  --max-content: 768px;
+  --page-gutter: 40px;
 }
 
-.header, .navbar {
-  background: var(--color-bg-primary) !important;
-  background-image: none !important;
-  height: var(--navbar-height);
-  color: var(--color-text-secondary);
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  gap: 24px;
+.header_container,
+.header,
+.navbar,
+.toolbar {
+  display: none !important;
 }
 
-.navbar-brand {
-  padding: 0;
-  flex: 0 0 auto;
-  align-items: center;
-  gap: 8px;
-}
-.navbar-brand .navbar-item {
-  padding: 0;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-.navbar-brand .header_logo {
-  width: 110px;
-  height: auto;
-  display: block;
-  /* Treat logo as monochrome mark in dark mode */
-}
-html[data-theme="dark"] .navbar-brand .header_logo,
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]):not([data-theme="dark"]) .navbar-brand .header_logo {
-    filter: invert(1) brightness(1.1) hue-rotate(180deg);
-  }
-}
-html[data-theme="dark"] .navbar-brand .header_logo {
-  filter: invert(1) brightness(1.1) hue-rotate(180deg);
-}
+.drawer-toggle { display: none; }
 
-.navbar a {
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-}
-.navbar a:hover {
-  color: var(--color-text-primary);
-  text-decoration: none;
-}
-
-.navbar-menu {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  gap: 4px;
-  position: static;
-  background: transparent;
-  box-shadow: none;
-  pointer-events: auto;
-  padding: 0;
-}
-
-.navbar-center {
-  display: flex;
-  flex: 0 1 auto;
-  gap: 4px;
-  align-items: center;
-  justify-content: flex-start;
-  pointer-events: auto;
-  position: static;
-  transform: none;
-}
-
-.navbar-center > .navbar-item,
-.navbar-center > .navbar-item.has-dropdown > .navbar-link {
-  color: var(--color-text-tertiary);
-  padding: 6px 12px !important;
-  border-radius: var(--radius-md);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  transition: background var(--dur-fast) var(--ease-default), color var(--dur-fast) var(--ease-default);
-  height: auto;
-}
-.navbar-center > .navbar-item:hover,
-.navbar-center > .navbar-item.has-dropdown:hover > .navbar-link,
-.navbar-center > .navbar-link:hover {
-  color: var(--color-text-primary) !important;
-  background: var(--color-bg-hover);
-}
-
-@media screen and (min-width: 1024px) {
-  .navbar-end {
-    position: static;
-    transform: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-  }
-  .navbar-end > .navbar-item,
-  .navbar-end .navbar-link {
-    color: var(--color-text-secondary);
-  }
-}
-
-.navbar-link::after {
-  content: none !important; /* drop the FA chevron */
-}
-
-.navbar-item.navbar-button,
-a.navbar-button {
-  background: var(--color-bg-brand-solid) !important;
-  color: var(--color-text-white) !important;
-  border: 1px solid var(--color-border-brand);
-  border-radius: var(--radius-md);
-  padding: 8px 14px !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  line-height: 20px;
-  box-shadow: var(--shadow-xs);
-  transition: background var(--dur-fast) var(--ease-default);
-}
-.navbar-item.navbar-button:hover {
-  background: var(--color-bg-brand-solid_hover) !important;
-  text-decoration: none !important;
-}
-html[data-theme="dark"] .navbar-item.navbar-button,
-html[data-theme="dark"] a.navbar-button {
-  color: var(--color-neutral-950) !important;
-}
-
-.navbar-dropdown,
-.navbar-dropdown.card {
-  background: var(--color-bg-primary) !important;
-  border: 1px solid var(--color-border-primary) !important;
-  border-radius: var(--radius-lg) !important;
-  box-shadow: var(--shadow-lg);
-  padding: 6px !important;
-  min-width: 220px;
-  margin-top: 4px;
-}
-.navbar-dropdown .navbar-item {
-  border-radius: var(--radius-sm);
-  padding: 8px 10px !important;
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  font-size: 14px;
-}
-.navbar-dropdown .navbar-item:hover {
-  background: var(--color-bg-hover);
-  color: var(--color-text-primary);
-}
-
-.navbar-burger span {
-  background-color: var(--color-fg-primary) !important;
-}
-
-/* ---------- HEADER TOOLBAR (search button + theme + platform CTA) ---------- */
-.header-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-  padding-left: 12px;
-}
-.cmdk-launch {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 10px 0 12px;
-  min-width: 240px;
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-md);
-  color: var(--color-text-tertiary);
-  font: 500 13px/1 var(--font-body);
-  cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-default), background var(--dur-fast) var(--ease-default);
-}
-.cmdk-launch:hover {
-  border-color: var(--color-border-strong);
-  background: var(--color-bg-tertiary);
-  color: var(--color-text-secondary);
-}
-.cmdk-launch .cmdk-icon { color: var(--color-fg-tertiary); flex: 0 0 auto; }
-.cmdk-launch .cmdk-placeholder { flex: 1; text-align: left; }
-.cmdk-launch .cmdk-kbd {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-primary);
-  border: 1px solid var(--color-border-primary);
-  color: var(--color-text-tertiary);
-  font: 500 11px/1 var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}
-@media (max-width: 1023px) {
-  .cmdk-launch { min-width: 0; padding: 0 10px; }
-  .cmdk-launch .cmdk-placeholder, .cmdk-launch .cmdk-kbd { display: none; }
-}
-
+/* Theme toggle (now in drawer footer) */
 .icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-md);
   background: var(--color-bg-primary);
@@ -237,7 +41,7 @@ html[data-theme="dark"] a.navbar-button {
   transition: background var(--dur-fast) var(--ease-default), color var(--dur-fast) var(--ease-default);
 }
 .icon-btn:hover { background: var(--color-bg-secondary); color: var(--color-text-primary); }
-.icon-btn svg { width: 18px; height: 18px; }
+.icon-btn svg { width: 16px; height: 16px; }
 
 .theme-toggle .sun { display: none; }
 .theme-toggle .moon { display: inline-flex; }
@@ -248,32 +52,7 @@ html[data-theme="dark"] .theme-toggle .moon { display: none; }
   html:not([data-theme="light"]):not([data-theme="dark"]) .theme-toggle .moon { display: none; }
 }
 
-/* ---------- TOOLBAR (Antora's crumb bar) ---------- */
-.toolbar {
-  display: none; /* not needed with new header */
-}
-
-/* ---------- LEFT NAV ---------- */
-.nav-container {
-  position: sticky;
-  top: var(--navbar-height);
-  width: var(--nav-width);
-  padding: 24px 8px 48px 20px;
-  background: transparent;
-}
-@media screen and (min-width: 769px) {
-  .nav-container {
-    top: var(--navbar-height);
-    font-size: 14px;
-  }
-}
-@media screen and (min-width: 1024px) {
-  .nav-container {
-    font-size: 14px;
-    max-height: calc(100vh - var(--navbar-height));
-    overflow-y: auto;
-  }
-}
+/* (drawer styles live further down in the Phase 2 block) */
 
 .nav {
   top: 0;
@@ -400,28 +179,40 @@ html[data-theme="dark"] .theme-toggle .moon { display: none; }
 /* ---------- CONTENT / DOC ---------- */
 main.article { background: var(--color-bg-primary); }
 .content_container {
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: 100vh;
   background: var(--color-bg-primary);
-}
-.body {
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  align-items: flex-start;
 }
 main {
   flex: 1 1 0;
   min-width: 0;
-  padding: 40px var(--page-gutter) 80px;
+  padding: 56px var(--page-gutter) 96px;
   background: var(--color-bg-primary);
+  display: flex;
+  justify-content: center;
+}
+main > .page_content {
+  width: 100%;
+  max-width: calc(var(--max-content) + var(--toc-width) + 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--toc-width);
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 1199px) {
+  main > .page_content {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: var(--max-content);
+    gap: 24px;
+  }
 }
 .doc {
-  max-width: var(--doc-max-width);
-  margin: 0 auto;
+  max-width: var(--max-content);
+  margin: 0;
   padding: 0;
   color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.65;
+  min-width: 0;
 }
 
 .doc h1, .doc h2, .doc h3, .doc h4, .doc h5, .doc h6 {
@@ -429,7 +220,7 @@ main {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.015em;
-  scroll-margin-top: calc(var(--navbar-height) + 24px);
+  scroll-margin-top: 32px;
 }
 .doc h1, .doc .sect0 > h1:first-child, .doc > h1:first-child {
   font-size: var(--text-display-sm);
@@ -515,8 +306,7 @@ main {
   font-weight: 500;
 }
 
-/* Code blocks */
-.doc pre,
+/* Code blocks — single border on the outer container only */
 .doc .listingblock > .content,
 .doc .literalblock > .content {
   background: var(--color-bg-secondary);
@@ -527,10 +317,29 @@ main {
   overflow-x: auto;
   box-shadow: none;
 }
-.doc pre code {
-  background: transparent;
-  border: 0;
-  padding: 0;
+.doc .listingblock > .content pre,
+.doc .literalblock > .content pre,
+.doc .listingblock > .content pre.highlight {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  overflow-x: visible;
+}
+/* doc.css:774 adds `box-shadow: inset 0 0 1.75px <border>` + `overflow-x: auto`
+   to `pre.highlight code`, which renders as a second border and a second
+   scrollbar inside our outer .content card. Neutralize. */
+.doc pre code,
+.doc .listingblock pre code,
+.doc .literalblock pre code,
+.doc pre.highlight code {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  overflow-x: visible !important;
   font-family: var(--font-mono);
   font-size: 13.5px;
   line-height: 1.65;
@@ -550,7 +359,7 @@ main {
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--color-bg-secondary);
+  background: transparent;
 }
 .doc .admonitionblock > table { width: 100%; border: 0; }
 .doc .admonitionblock > table > tbody > tr > td.icon,
@@ -722,15 +531,18 @@ main {
 /* ---------- TOC ---------- */
 aside.toc, .toc {
   width: var(--toc-width);
-  padding: 40px 24px 40px 16px;
+  padding: 0 0 0 16px;
   font-size: 13px;
   line-height: 1.5;
   position: sticky;
-  top: var(--navbar-height);
-  max-height: calc(100vh - var(--navbar-height));
+  top: 40px;
+  max-height: calc(100vh - 80px);
   overflow-y: auto;
   border-left: 0;
+  align-self: start;
+  margin: 0;
 }
+@media (max-width: 1199px) { aside.toc, .toc { display: none; } }
 .toc .toc-menu { margin: 0; }
 .toc .toc-menu h3 {
   font-size: 12px;
@@ -794,24 +606,70 @@ footer {
   margin-left: 6px;
 }
 
-/* ---------- PAGINATION ---------- */
+/* ---------- PAGINATION ----------
+   Layout: two cards, each containing the label (Prev/Next) + the link title.
+   pagination.css uses span::before for the label and a::before/::after for
+   absolutely-positioned chevrons that float outside the card; we neutralize
+   the absolute positioning so everything sits inside one bordered card. */
 nav.pagination, .pagination {
-  margin-top: 56px;
-  padding-top: 24px;
+  display: flex !important;
+  gap: 16px;
+  margin: 56px 0 0 !important;
+  padding: 24px 0 0 !important;
   border-top: 1px solid var(--color-border-secondary);
-  gap: 12px;
   font-size: 14px;
 }
-.pagination a {
-  display: block;
-  padding: 12px 16px;
+nav.pagination .prev,
+nav.pagination .next {
+  flex: 1 1 0;
+  display: flex !important;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px !important;
+  margin: 0 !important;
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-lg);
-  color: var(--color-text-primary);
   background: var(--color-bg-primary);
-  transition: border-color var(--dur-fast) var(--ease-default), background var(--dur-fast) var(--ease-default);
+  transition: border-color var(--dur-fast) var(--ease-default);
 }
-.pagination a:hover { border-color: var(--color-border-strong); background: var(--color-bg-secondary); text-decoration: none; }
+nav.pagination .prev { text-align: left; align-items: flex-start; }
+nav.pagination .next { text-align: right; align-items: flex-end; margin-left: 0 !important; }
+nav.pagination .prev:has(a:hover),
+nav.pagination .next:has(a:hover) { border-color: var(--color-border-strong); }
+nav.pagination .prev::before,
+nav.pagination .next::before {
+  color: var(--color-text-quaternary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0 !important;
+}
+nav.pagination a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 !important;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.4;
+}
+nav.pagination .next a { flex-direction: row; }
+nav.pagination .prev a { flex-direction: row; }
+nav.pagination a:hover { text-decoration: underline; }
+/* Put chevrons inline with the title, not absolutely positioned over the border */
+nav.pagination a::before,
+nav.pagination a::after {
+  position: static !important;
+  transform: none !important;
+  width: auto !important;
+  top: auto !important;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-text-tertiary);
+  font-weight: 400;
+}
 .pagination .label { color: var(--color-text-quaternary); font-size: 12px; }
 
 /* ---------- ABSTRACT / QUOTE BLOCKS ---------- */
@@ -1080,25 +938,40 @@ html[data-theme="dark"] .hljs-deletion { color: #ffa198; background: rgb(248 81 
 }
 
 /* ============================================================
-   PERSISTENT DRAWER NAVIGATION (Phase 2)
+   PERSISTENT DRAWER NAVIGATION (Phase 2 + 3)
    ============================================================ */
-.body { align-items: stretch; }
+.content_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.body {
+  align-items: stretch;
+  max-width: none !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
 
+/* Drawer: fixed on desktop, flush-left, full height */
 .nav-container {
-  position: sticky;
-  top: var(--navbar-height);
-  align-self: flex-start;
+  position: fixed;
+  left: 0;
+  top: 0;
   width: var(--nav-width);
-  max-width: var(--nav-width);
-  flex: 0 0 var(--nav-width);
-  height: calc(100vh - var(--navbar-height));
+  height: 100vh;
   padding: 0;
-  background: transparent;
+  background: var(--color-bg-primary);
   border-right: 1px solid var(--color-border-secondary);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  z-index: 40;
 }
+/* Reserve space so content sits beside the fixed drawer */
+.content_container { padding-left: var(--nav-width); }
 
 .drawer {
   display: flex;
@@ -1109,13 +982,101 @@ html[data-theme="dark"] .hljs-deletion { color: #ffa198; background: rgb(248 81 
   color: var(--color-text-tertiary);
 }
 
-/* --- Drawer header: product switcher --- */
+/* --- Drawer header (brand + product + search) --- */
 .drawer-header {
   flex: 0 0 auto;
-  padding: 14px 14px 10px;
+  padding: 14px 14px 12px;
   border-bottom: 1px solid var(--color-border-secondary);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+.drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  padding: 0 2px;
+}
+.drawer-brand:hover { text-decoration: none; color: var(--color-text-primary); }
+.drawer-brand-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+html[data-theme="dark"] .drawer-brand-logo { filter: invert(1) brightness(1.1); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]):not([data-theme="dark"]) .drawer-brand-logo { filter: invert(1) brightness(1.1); }
+}
+.drawer-brand-label {
+  font: 600 14px/1 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+/* --- Full-width search trigger --- */
+.drawer-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+  font: 500 13px/1 var(--font-body);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-default), background var(--dur-fast) var(--ease-default);
+}
+.drawer-search:hover { border-color: var(--color-border-strong); background: var(--color-bg-tertiary); color: var(--color-text-secondary); }
+.drawer-search-icon { color: var(--color-fg-tertiary); flex: 0 0 auto; }
+.drawer-search-placeholder { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drawer-search-kbd {
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-text-tertiary);
+  font: 500 11px/1 var(--font-mono);
+  flex: 0 0 auto;
+}
+
+/* --- Drawer footer --- */
+.drawer-footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--color-border-secondary);
+  background: var(--color-bg-primary);
+}
+.drawer-footer-link {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  font: 500 13px/1 var(--font-body);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-default), color var(--dur-fast) var(--ease-default), border-color var(--dur-fast) var(--ease-default);
+}
+.drawer-footer-link:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+.drawer-footer-link svg { color: var(--color-fg-tertiary); flex: 0 0 auto; }
+.drawer-footer .theme-toggle { flex: 0 0 32px; }
 .drawer-product {
   display: inline-flex;
   align-items: center;
@@ -1137,11 +1098,13 @@ html[data-theme="dark"] .hljs-deletion { color: #ffa198; background: rgb(248 81 
   align-items: center;
   justify-content: center;
   width: 22px; height: 22px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border-secondary);
-  color: var(--color-fg-secondary);
   flex: 0 0 auto;
+}
+.drawer-product-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 .drawer-product-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .drawer-product-chip {
@@ -1307,28 +1270,279 @@ html[data-theme="dark"] .hljs-deletion { color: #ffa198; background: rgb(248 81 
 /* Hide the Antora-rendered "secondary" nav-explore panel inside drawer */
 .nav-panel-explore { display: none; }
 
-/* Mobile slide-over */
-@media (max-width: 1023px) {
-  .nav-container {
-    position: fixed;
-    inset: var(--navbar-height) auto 0 0;
-    z-index: 1000;
-    height: calc(100vh - var(--navbar-height));
-    background: var(--color-bg-primary);
-    transform: translateX(-100%);
-    transition: transform var(--dur-med) var(--ease-default);
-    border-right: 1px solid var(--color-border-secondary);
-    box-shadow: var(--shadow-xl);
-  }
-  html.is-drawer-open .nav-container { transform: translateX(0); }
-  html.is-drawer-open::before {
-    content: "";
-    position: fixed;
-    inset: var(--navbar-height) 0 0 0;
-    background: var(--color-bg-overlay);
-    z-index: 999;
+/* (mobile skipped for now) */
+
+/* ============================================================
+   TOPBAR (Phase 3)
+   ============================================================ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 56px;
+  padding: 0 28px;
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border-secondary);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+}
+.topbar-left { display: flex; align-items: center; min-width: 0; flex: 1 1 auto; }
+.topbar-right { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+
+.topbar .breadcrumbs { margin: 0; }
+.topbar .breadcrumbs ul {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  overflow: hidden;
+}
+.topbar .breadcrumbs li { white-space: nowrap; }
+.topbar .breadcrumbs li a { color: var(--color-text-tertiary); font-weight: 500; text-decoration: none; }
+.topbar .breadcrumbs li a:hover { color: var(--color-text-primary); }
+.topbar .breadcrumbs li:not(:last-child)::after {
+  content: "/";
+  color: var(--color-text-quaternary);
+  margin-left: 6px;
+}
+.topbar .breadcrumbs li:last-child { color: var(--color-text-primary); font-weight: 500; }
+
+.topbar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 10px 0 12px;
+  min-width: 260px;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+  font: 500 13px/1 var(--font-body);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-default), background var(--dur-fast) var(--ease-default);
+}
+.topbar-search:hover { border-color: var(--color-border-strong); color: var(--color-text-secondary); background: var(--color-bg-tertiary); }
+.topbar-search-icon { color: var(--color-fg-tertiary); flex: 0 0 auto; }
+.topbar-search-placeholder { flex: 1; text-align: left; }
+.topbar-search-kbd {
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-text-tertiary);
+  font: 500 11px/1 var(--font-mono);
+  flex: 0 0 auto;
+}
+
+.topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  background: #000;
+  color: #fff !important;
+  font: 600 13px/1 var(--font-body);
+  text-decoration: none;
+  letter-spacing: -0.005em;
+  transition: background var(--dur-fast) var(--ease-default), transform var(--dur-fast) var(--ease-default);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06), var(--shadow-xs);
+}
+.topbar-cta-icon { opacity: 0.8; transition: transform var(--dur-fast) var(--ease-default); }
+.topbar-cta:hover .topbar-cta-icon { transform: translate(1px, -1px); opacity: 1; }
+.topbar-cta:hover {
+  background: var(--color-neutral-800);
+  text-decoration: none;
+  color: #fff !important;
+}
+html[data-theme="dark"] .topbar-cta {
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-950) !important;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.1), var(--shadow-xs);
+}
+html[data-theme="dark"] .topbar-cta:hover {
+  background: var(--color-white);
+  color: var(--color-neutral-950) !important;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]):not([data-theme="dark"]) .topbar-cta {
+    background: var(--color-neutral-50);
+    color: var(--color-neutral-950) !important;
   }
 }
+
+/* Pull main content up since topbar is already the visual top of the content column */
+main { padding-top: 40px; }
+
+/* ============================================================
+   DRAWER DEEP-NESTING EMPHASIS
+   ============================================================ */
+.nav-tree .nav-tree {
+  margin-left: 14px;
+  padding-left: 16px;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+.nav-tree .nav-tree .nav-link { font-size: 13px; padding: 5px 10px; }
+.nav-tree .nav-tree .nav-tree .nav-link { font-size: 12.5px; }
+.drawer-body { padding: 16px 14px 40px; }
+.nav-section + .nav-section { margin-top: 22px; }
+
+/* Unused drawer-footer/search classes (moved to topbar) — hide if rendered. */
+.drawer-footer,
+.drawer-search { display: none !important; }
+
+/* ============================================================
+   TABS (Untitled UI style, light + dark)
+   ============================================================ */
+.doc .tabs,
+.doc .openblock.tabs {
+  margin: 28px 0;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+.doc .tabs > .content,
+.doc .openblock.tabs > .content { padding: 0 !important; }
+
+.doc .tabs .tablist > ul,
+.doc .openblock.tabs .tablist > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0;
+  margin: 0 0 20px;
+  list-style: none;
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.doc .tabs .tablist > ul li,
+.doc .openblock.tabs .tablist > ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: var(--color-text-tertiary) !important;
+  font: 500 13.5px/1.4 var(--font-body) !important;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-default), background var(--dur-fast) var(--ease-default);
+  top: 0 !important;
+}
+.doc .tabs .tablist > ul li p,
+.doc .openblock.tabs .tablist > ul li p {
+  margin: 0 !important;
+  color: inherit !important;
+  font: inherit !important;
+  line-height: inherit !important;
+}
+.doc .tabs .tablist > ul li:hover,
+.doc .openblock.tabs .tablist > ul li:hover {
+  color: var(--color-text-primary) !important;
+  background: var(--color-bg-hover) !important;
+  border-radius: var(--radius-sm) !important;
+}
+.doc .tabs .tablist > ul li::after,
+.doc .openblock.tabs .tablist > ul li::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: -1px !important;
+  height: 2px !important;
+  background: transparent !important;
+  border-radius: 2px 2px 0 0;
+}
+.doc .tabs.is-loading .tablist > ul li:first-child,
+.doc .tabs:not(.is-loading) .tablist > ul li.is-selected,
+.doc .openblock.tabs .tablist > ul li.is-selected {
+  color: var(--color-text-primary) !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+.doc .tabs.is-loading .tablist > ul li:first-child::after,
+.doc .tabs:not(.is-loading) .tablist > ul li.is-selected::after,
+.doc .openblock.tabs .tablist > ul li.is-selected::after {
+  background: var(--color-text-primary) !important;
+}
+
+.doc .tabs .tabpanel,
+.doc .openblock.tabs .tabpanel {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  color: var(--color-text-secondary) !important;
+}
+.doc .tabs .tabpanel > :first-child { margin-top: 0 !important; }
+.doc .tabs .tabpanel > :last-child { margin-bottom: 0 !important; }
+.doc .tabs .tabpanel.is-hidden { display: none !important; }
+
+/* ============================================================
+   ADMONITION FIX — hide default label (Tip / Note), keep left-border accent
+   doc.css floats td.icon as an absolutely-positioned pill that renders
+   OVER the left border. Neutralize that and render the icon inline.
+   ============================================================ */
+.doc .admonitionblock > table {
+  table-layout: auto !important;
+  position: static !important;
+}
+.doc .admonitionblock > table > tbody > tr > td.icon {
+  position: static !important;
+  transform: none !important;
+  background: transparent !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  text-transform: none !important;
+  width: 44px !important;
+  height: auto !important;
+  padding: 14px 0 14px 16px !important;
+  text-align: left;
+  vertical-align: top;
+}
+.doc .admonitionblock > table > tbody > tr > td.icon .title,
+.doc .admonitionblock > table > tbody > tr > td.icon > .title {
+  /* Hide the built-in "Tip"/"Note"/"Warning" label text; the colored border-left is enough */
+  display: none !important;
+}
+.doc .admonitionblock > table > tbody > tr > td.icon i {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  height: auto !important;
+}
+/* doc.css injects the label text via `i::after { content: attr(title) }` — suppress it */
+.doc .admonitionblock > table > tbody > tr > td.icon i::after {
+  content: none !important;
+}
+.doc .admonitionblock > table > tbody > tr > td.content {
+  padding: 14px 16px 14px 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+.doc .admonitionblock > table > tbody > tr > td.content > .title:first-child {
+  color: var(--color-text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin: 0 0 6px !important;
+}
+
+/* Make sure nested admonitions inside exampleblock / openblock don't stack borders */
+.doc .exampleblock .admonitionblock,
+.doc .openblock .admonitionblock { margin: 8px 0; }
 
 /* FOUC guard for inline theme script */
 html.theme-ready { /* marker so we could animate transitions; kept empty for now */ }
