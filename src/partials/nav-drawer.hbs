@@ -1,0 +1,302 @@
+{{!--
+  Persistent drawer nav — hand-authored cross-component IA.
+  See NAV_IA.md for the rationale. Real Antora URLs used throughout.
+  `data-href` is matched in JS against location.pathname to mark active + ancestors.
+--}}
+<nav class="drawer" aria-label="Documentation navigation">
+  <div class="drawer-header">
+    <button type="button" class="drawer-product" id="drawer-product" aria-haspopup="listbox" aria-expanded="false">
+      <span class="drawer-product-icon" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg>
+      </span>
+      <span class="drawer-product-name">Axon Framework</span>
+      <span class="drawer-product-chip">4.11</span>
+      <svg class="drawer-product-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="drawer-product-menu" id="drawer-product-menu" role="listbox" hidden>
+      <a role="option" class="drawer-product-option is-current" href="{{{relativize '/axon-framework-reference/development/'}}}" data-product="af">
+        <span class="drawer-product-option-name">Axon Framework</span>
+        <span class="drawer-product-option-meta">4.11 · reference</span>
+      </a>
+      <a role="option" class="drawer-product-option" href="{{{relativize '/axon-server-reference/'}}}" data-product="as">
+        <span class="drawer-product-option-name">Axon Server</span>
+        <span class="drawer-product-option-meta">reference</span>
+      </a>
+      <a role="option" class="drawer-product-option" href="{{{relativize '/synapse-reference/'}}}" data-product="synapse">
+        <span class="drawer-product-option-name">Axon Synapse</span>
+        <span class="drawer-product-option-meta">reference</span>
+      </a>
+      <a role="option" class="drawer-product-option" href="{{{relativize '/axoniq-platform-reference/'}}}" data-product="platform">
+        <span class="drawer-product-option-name">AxonIQ Platform</span>
+        <span class="drawer-product-option-meta">reference</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="drawer-body">
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Getting started</h3>
+      <ul class="nav-tree">
+        <li><a class="nav-link" data-href="/home/" href="{{{relativize '/home/'}}}">Introduction</a></li>
+        <li><a class="nav-link" data-href="/home/basics/" href="{{{relativize '/home/basics/'}}}">Basics</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-5-getting-started/" href="{{{relativize '/axon-framework-5-getting-started/'}}}">Getting started with AF 5</a></li>
+        <li><a class="nav-link" data-href="/bikerental-demo/" href="{{{relativize '/bikerental-demo/'}}}">Bike rental tutorial</a></li>
+      </ul>
+    </section>
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Core concepts</h3>
+      <ul class="nav-tree">
+        <li>
+          <details class="nav-group" data-nav-id="af-messaging">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/messaging-concepts/"><span>Messaging concepts</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/messaging-concepts/anatomy-message/" href="{{{relativize '/axon-framework-reference/development/messaging-concepts/anatomy-message/'}}}">Anatomy of a message</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/messaging-concepts/message-intercepting/" href="{{{relativize '/axon-framework-reference/development/messaging-concepts/message-intercepting/'}}}">Message intercepting</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/messaging-concepts/supported-parameters-annotated-handlers/" href="{{{relativize '/axon-framework-reference/development/messaging-concepts/supported-parameters-annotated-handlers/'}}}">Supported parameters</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/messaging-concepts/message-correlation/" href="{{{relativize '/axon-framework-reference/development/messaging-concepts/message-correlation/'}}}">Message correlation</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/messaging-concepts/exception-handling/" href="{{{relativize '/axon-framework-reference/development/messaging-concepts/exception-handling/'}}}">Exception handling</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/messaging-concepts/processing-context/" href="{{{relativize '/axon-framework-reference/development/messaging-concepts/processing-context/'}}}">Processing context</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="af-commands">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/commands/"><span>Commands</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/commands/command-handlers/" href="{{{relativize '/axon-framework-reference/development/commands/command-handlers/'}}}">Command handlers</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/commands/command-dispatchers/" href="{{{relativize '/axon-framework-reference/development/commands/command-dispatchers/'}}}">Command dispatchers</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/commands/infrastructure/" href="{{{relativize '/axon-framework-reference/development/commands/infrastructure/'}}}">Infrastructure</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/commands/configuration/" href="{{{relativize '/axon-framework-reference/development/commands/configuration/'}}}">Configuration</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="af-events">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/events/"><span>Events</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-handlers/" href="{{{relativize '/axon-framework-reference/development/events/event-handlers/'}}}">Event handlers</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-publishing/" href="{{{relativize '/axon-framework-reference/development/events/event-publishing/'}}}">Event publishing</a></li>
+              <li>
+                <details class="nav-group" data-nav-id="af-events-processors">
+                  <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/events/event-processors/"><span>Event processors</span></summary>
+                  <ul class="nav-tree">
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-processors/subscribing/" href="{{{relativize '/axon-framework-reference/development/events/event-processors/subscribing/'}}}">Subscribing</a></li>
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-processors/streaming/" href="{{{relativize '/axon-framework-reference/development/events/event-processors/streaming/'}}}">Streaming</a></li>
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-processors/dead-letter-queue/" href="{{{relativize '/axon-framework-reference/development/events/event-processors/dead-letter-queue/'}}}">Dead-letter queue</a></li>
+                  </ul>
+                </details>
+              </li>
+              <li>
+                <details class="nav-group" data-nav-id="af-events-infra">
+                  <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/events/infrastructure/"><span>Infrastructure</span></summary>
+                  <ul class="nav-tree">
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-store-internals/" href="{{{relativize '/axon-framework-reference/development/events/event-store-internals/'}}}">Event store internals</a></li>
+                  </ul>
+                </details>
+              </li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/events/event-versioning/" href="{{{relativize '/axon-framework-reference/development/events/event-versioning/'}}}">Event versioning</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="af-queries">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/queries/"><span>Queries</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/queries/query-handlers/" href="{{{relativize '/axon-framework-reference/development/queries/query-handlers/'}}}">Query handlers</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/queries/query-dispatchers/" href="{{{relativize '/axon-framework-reference/development/queries/query-dispatchers/'}}}">Query dispatchers</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/queries/infrastructure/" href="{{{relativize '/axon-framework-reference/development/queries/infrastructure/'}}}">Infrastructure</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/queries/configuration/" href="{{{relativize '/axon-framework-reference/development/queries/configuration/'}}}">Configuration</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Operations</h3>
+      <ul class="nav-tree">
+        <li>
+          <details class="nav-group" data-nav-id="af-testing">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/testing/"><span>Testing</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/testing/basic-testing/" href="{{{relativize '/axon-framework-reference/development/testing/basic-testing/'}}}">Basic testing</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/testing/matchers-and-field-filters/" href="{{{relativize '/axon-framework-reference/development/testing/matchers-and-field-filters/'}}}">Matchers &amp; field filters</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/testing/advanced-testing/" href="{{{relativize '/axon-framework-reference/development/testing/advanced-testing/'}}}">Advanced testing</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/conversion/" href="{{{relativize '/axon-framework-reference/development/conversion/'}}}">Conversion</a></li>
+        <li>
+          <details class="nav-group" data-nav-id="af-tuning">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/tuning/"><span>Tuning</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/tuning/event-processing/" href="{{{relativize '/axon-framework-reference/development/tuning/event-processing/'}}}">Event processing</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/tuning/command-processing/" href="{{{relativize '/axon-framework-reference/development/tuning/command-processing/'}}}">Command processing</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/tuning/rdbms-tuning/" href="{{{relativize '/axon-framework-reference/development/tuning/rdbms-tuning/'}}}">RDBMS tuning</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="af-monitoring">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/monitoring/"><span>Monitoring</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/monitoring/metrics/" href="{{{relativize '/axon-framework-reference/development/monitoring/metrics/'}}}">Metrics</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/monitoring/health/" href="{{{relativize '/axon-framework-reference/development/monitoring/health/'}}}">Health</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/monitoring/processors/" href="{{{relativize '/axon-framework-reference/development/monitoring/processors/'}}}">Processors</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/monitoring/message-tracking/" href="{{{relativize '/axon-framework-reference/development/monitoring/message-tracking/'}}}">Message tracking</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/spring-boot-integration/" href="{{{relativize '/axon-framework-reference/development/spring-boot-integration/'}}}">Spring Boot integration</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/modules/" href="{{{relativize '/axon-framework-reference/development/modules/'}}}">Modules</a></li>
+      </ul>
+    </section>
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Migration (AF4 → AF5)</h3>
+      <ul class="nav-tree">
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/" href="{{{relativize '/axon-framework-reference/development/migration/'}}}">Overview</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/why-upgrade/" href="{{{relativize '/axon-framework-reference/development/migration/why-upgrade/'}}}">Why upgrade</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/prerequisites/" href="{{{relativize '/axon-framework-reference/development/migration/prerequisites/'}}}">Prerequisites</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/solved-architecture-choices/" href="{{{relativize '/axon-framework-reference/development/migration/solved-architecture-choices/'}}}">Solved architecture choices</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/understanding-architecture-principles/" href="{{{relativize '/axon-framework-reference/development/migration/understanding-architecture-principles/'}}}">Architecture principles</a></li>
+        <li>
+          <details class="nav-group" data-nav-id="af-migration-paths">
+            <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/migration/paths/"><span>Paths</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/messages/" href="{{{relativize '/axon-framework-reference/development/migration/paths/messages/'}}}">Messages</a></li>
+              <li>
+                <details class="nav-group" data-nav-id="af-migration-aggregates">
+                  <summary class="nav-link nav-parent" data-href="/axon-framework-reference/development/migration/paths/aggregates/"><span>Aggregates</span></summary>
+                  <ul class="nav-tree">
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/aggregates/configuration-migration/" href="{{{relativize '/axon-framework-reference/development/migration/paths/aggregates/configuration-migration/'}}}">Configuration migration</a></li>
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/aggregates/multi-entity-migration/" href="{{{relativize '/axon-framework-reference/development/migration/paths/aggregates/multi-entity-migration/'}}}">Multi-entity migration</a></li>
+                    <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/aggregates/polymorphism-migration/" href="{{{relativize '/axon-framework-reference/development/migration/paths/aggregates/polymorphism-migration/'}}}">Polymorphism migration</a></li>
+                  </ul>
+                </details>
+              </li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/projectors-event-processors/" href="{{{relativize '/axon-framework-reference/development/migration/paths/projectors-event-processors/'}}}">Projectors &amp; event processors</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/event-store/" href="{{{relativize '/axon-framework-reference/development/migration/paths/event-store/'}}}">Event store</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/test-fixtures/" href="{{{relativize '/axon-framework-reference/development/migration/paths/test-fixtures/'}}}">Test fixtures</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/serializers/" href="{{{relativize '/axon-framework-reference/development/migration/paths/serializers/'}}}">Serializers</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/dlq/" href="{{{relativize '/axon-framework-reference/development/migration/paths/dlq/'}}}">DLQ</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/interceptors/" href="{{{relativize '/axon-framework-reference/development/migration/paths/interceptors/'}}}">Interceptors</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/configuration/" href="{{{relativize '/axon-framework-reference/development/migration/paths/configuration/'}}}">Configuration</a></li>
+              <li><a class="nav-link" data-href="/axon-framework-reference/development/migration/paths/sequencing-policies/" href="{{{relativize '/axon-framework-reference/development/migration/paths/sequencing-policies/'}}}">Sequencing policies</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Guides</h3>
+      <ul class="nav-tree">
+        <li><a class="nav-link" data-href="/identifier-generation-guide/" href="{{{relativize '/identifier-generation-guide/'}}}">Identifier generation</a></li>
+        <li>
+          <details class="nav-group" data-nav-id="af-mhcg">
+            <summary class="nav-link nav-parent"><span>Message handler customization</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/message-handler-customization-guide/parameter-resolvers/" href="{{{relativize '/message-handler-customization-guide/parameter-resolvers/'}}}">Parameter resolvers</a></li>
+              <li><a class="nav-link" data-href="/message-handler-customization-guide/handler-enhancers/" href="{{{relativize '/message-handler-customization-guide/handler-enhancers/'}}}">Handler enhancers</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a class="nav-link" data-href="/meta-annotations-guide/" href="{{{relativize '/meta-annotations-guide/'}}}">Meta-annotations</a></li>
+        <li><a class="nav-link" data-href="/bikerental-console-demo/" href="{{{relativize '/bikerental-console-demo/'}}}">AxonIQ Console demo</a></li>
+      </ul>
+    </section>
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Extensions</h3>
+      <ul class="nav-tree">
+        <li>
+          <details class="nav-group" data-nav-id="ext-messaging">
+            <summary class="nav-link nav-parent"><span>Messaging</span></summary>
+            <ul class="nav-tree">
+              <li>
+                <details class="nav-group" data-nav-id="ext-kafka">
+                  <summary class="nav-link nav-parent" data-href="/kafka-extension-reference/4.11/"><span>Kafka</span></summary>
+                  <ul class="nav-tree">
+                    <li><a class="nav-link" data-href="/kafka-extension-reference/4.11/publishing/" href="{{{relativize '/kafka-extension-reference/4.11/publishing/'}}}">Publishing</a></li>
+                    <li><a class="nav-link" data-href="/kafka-extension-reference/4.11/consuming/" href="{{{relativize '/kafka-extension-reference/4.11/consuming/'}}}">Consuming</a></li>
+                    <li><a class="nav-link" data-href="/kafka-extension-reference/4.11/message-format/" href="{{{relativize '/kafka-extension-reference/4.11/message-format/'}}}">Message format</a></li>
+                    <li><a class="nav-link" data-href="/kafka-extension-reference/4.11/springboot-configuration/" href="{{{relativize '/kafka-extension-reference/4.11/springboot-configuration/'}}}">Spring Boot config</a></li>
+                    <li><a class="nav-link" data-href="/kafka-extension-reference/4.11/release-notes/" href="{{{relativize '/kafka-extension-reference/4.11/release-notes/'}}}">Release notes</a></li>
+                  </ul>
+                </details>
+              </li>
+              <li><a class="nav-link" data-href="/amqp-extension-reference/4.11/" href="{{{relativize '/amqp-extension-reference/4.11/'}}}">AMQP</a></li>
+              <li><a class="nav-link" data-href="/jgroups-extension-reference/4.11/" href="{{{relativize '/jgroups-extension-reference/4.11/'}}}">JGroups</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="ext-data">
+            <summary class="nav-link nav-parent"><span>Data stores</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/mongodb-extension-reference/4.11/" href="{{{relativize '/mongodb-extension-reference/4.11/'}}}">Mongo</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="ext-lang">
+            <summary class="nav-link nav-parent"><span>Language</span></summary>
+            <ul class="nav-tree">
+              <li>
+                <details class="nav-group" data-nav-id="ext-kotlin">
+                  <summary class="nav-link nav-parent" data-href="/kotlin-extension-reference/4.11/"><span>Kotlin</span></summary>
+                  <ul class="nav-tree">
+                    <li><a class="nav-link" data-href="/kotlin-extension-reference/4.11/commands/" href="{{{relativize '/kotlin-extension-reference/4.11/commands/'}}}">Commands</a></li>
+                    <li><a class="nav-link" data-href="/kotlin-extension-reference/4.11/events/" href="{{{relativize '/kotlin-extension-reference/4.11/events/'}}}">Events</a></li>
+                    <li><a class="nav-link" data-href="/kotlin-extension-reference/4.11/queries/" href="{{{relativize '/kotlin-extension-reference/4.11/queries/'}}}">Queries</a></li>
+                    <li><a class="nav-link" data-href="/kotlin-extension-reference/4.11/release-notes/" href="{{{relativize '/kotlin-extension-reference/4.11/release-notes/'}}}">Release notes</a></li>
+                  </ul>
+                </details>
+              </li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="ext-reactive">
+            <summary class="nav-link nav-parent"><span>Reactive</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/reactor-extension-reference/4.11/" href="{{{relativize '/reactor-extension-reference/4.11/'}}}">Reactor</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="ext-ops">
+            <summary class="nav-link nav-parent"><span>Operations</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/multitenancy-extension-reference/4.11/" href="{{{relativize '/multitenancy-extension-reference/4.11/'}}}">Multi-tenancy</a></li>
+              <li><a class="nav-link" data-href="/jobrunr-pro-extension-reference/4.11/" href="{{{relativize '/jobrunr-pro-extension-reference/4.11/'}}}">JobRunr Pro</a></li>
+              <li><a class="nav-link" data-href="/tracing-extension-reference/4.11/" href="{{{relativize '/tracing-extension-reference/4.11/'}}}">Tracing</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="nav-group" data-nav-id="ext-spring">
+            <summary class="nav-link nav-parent"><span>Spring</span></summary>
+            <ul class="nav-tree">
+              <li><a class="nav-link" data-href="/spring-aot-extension-reference/4.11/" href="{{{relativize '/spring-aot-extension-reference/4.11/'}}}">Spring AOT</a></li>
+              <li><a class="nav-link" data-href="/spring-cloud-extension-reference/4.11/" href="{{{relativize '/spring-cloud-extension-reference/4.11/'}}}">Spring Cloud</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+    <section class="nav-section">
+      <h3 class="nav-section-title">Release notes</h3>
+      <ul class="nav-tree">
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/release-notes/major-releases/" href="{{{relativize '/axon-framework-reference/development/release-notes/major-releases/'}}}">Major releases</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/release-notes/minor-releases/" href="{{{relativize '/axon-framework-reference/development/release-notes/minor-releases/'}}}">Minor releases</a></li>
+        <li><a class="nav-link" data-href="/axon-framework-reference/development/known-issues-and-workarounds/" href="{{{relativize '/axon-framework-reference/development/known-issues-and-workarounds/'}}}">Known issues</a></li>
+      </ul>
+    </section>
+
+  </div>
+</nav>

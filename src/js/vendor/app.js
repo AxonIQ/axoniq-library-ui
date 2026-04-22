@@ -2,6 +2,120 @@
   'use strict'
 
   // ============================================================
+  // Nav drawer: active path, details persistence, product switcher
+  // ============================================================
+  var drawer = document.querySelector('.drawer')
+  if (drawer) {
+    var path = location.pathname.replace(/\/+$/, '/') // normalise trailing slash
+    if (!path.endsWith('/')) path += '/'
+    var all = drawer.querySelectorAll('.nav-link')
+    var bestMatch = null
+    var bestLen = -1
+
+    Array.prototype.forEach.call(all, function (el) {
+      var href = el.getAttribute('data-href')
+      if (!href) return
+      var norm = href.endsWith('/') ? href : href + '/'
+      if (path === norm || path === norm.replace(/\/$/, '')) {
+        if (norm.length > bestLen) { bestMatch = el; bestLen = norm.length }
+      }
+    })
+
+    // Fallback: longest prefix match
+    if (!bestMatch) {
+      Array.prototype.forEach.call(all, function (el) {
+        var href = el.getAttribute('data-href')
+        if (!href) return
+        var norm = href.endsWith('/') ? href : href + '/'
+        if (path.indexOf(norm) === 0 && norm.length > bestLen) {
+          bestMatch = el; bestLen = norm.length
+        }
+      })
+    }
+
+    if (bestMatch) {
+      bestMatch.classList.add('is-current')
+      // Walk up: open every ancestor <details> and mark summaries as ancestors
+      var node = bestMatch.parentElement
+      while (node && node !== drawer) {
+        if (node.tagName === 'DETAILS') {
+          node.open = true
+          var sum = node.querySelector(':scope > summary.nav-link')
+          if (sum && sum !== bestMatch) sum.classList.add('is-ancestor')
+        }
+        node = node.parentElement
+      }
+      // Scroll into view within drawer body
+      setTimeout(function () {
+        var body = drawer.querySelector('.drawer-body')
+        if (!body) return
+        var r = bestMatch.getBoundingClientRect()
+        var br = body.getBoundingClientRect()
+        if (r.top < br.top || r.bottom > br.bottom) {
+          body.scrollTop += r.top - br.top - 80
+        }
+      }, 0)
+    }
+
+    // Persist details open/closed state
+    var STORAGE_KEY = 'axoniq-nav-open'
+    var openSet = {}
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY)
+      if (raw) openSet = JSON.parse(raw) || {}
+    } catch (e) {}
+
+    Array.prototype.forEach.call(drawer.querySelectorAll('details[data-nav-id]'), function (d) {
+      var id = d.getAttribute('data-nav-id')
+      // Only restore if user hasn't just been marked as ancestor (already open)
+      if (!d.open && openSet[id]) d.open = true
+      d.addEventListener('toggle', function () {
+        openSet[id] = d.open
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(openSet)) } catch (e) {}
+      })
+    })
+
+    // Product switcher popover
+    var productBtn = document.getElementById('drawer-product')
+    var productMenu = document.getElementById('drawer-product-menu')
+    if (productBtn && productMenu) {
+      function closeProduct () {
+        productBtn.setAttribute('aria-expanded', 'false')
+        productMenu.hidden = true
+      }
+      function openProduct () {
+        productBtn.setAttribute('aria-expanded', 'true')
+        productMenu.hidden = false
+      }
+      productBtn.addEventListener('click', function (e) {
+        e.stopPropagation()
+        productMenu.hidden ? openProduct() : closeProduct()
+      })
+      document.addEventListener('click', function (e) {
+        if (productMenu.hidden) return
+        if (!productMenu.contains(e.target) && e.target !== productBtn) closeProduct()
+      })
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !productMenu.hidden) closeProduct()
+      })
+    }
+
+    // Mobile drawer toggle (reuses existing navbar-burger if present)
+    var burger = document.querySelector('.navbar-burger')
+    if (burger) {
+      burger.addEventListener('click', function () {
+        document.documentElement.classList.toggle('is-drawer-open')
+      })
+      // Close on any link click
+      drawer.addEventListener('click', function (e) {
+        if (e.target.closest('.nav-link:not(.nav-parent)')) {
+          document.documentElement.classList.remove('is-drawer-open')
+        }
+      })
+    }
+  }
+
+  // ============================================================
   // Theme toggle
   // ============================================================
   var themeBtn = document.getElementById('theme-toggle')

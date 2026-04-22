@@ -1079,5 +1079,256 @@ html[data-theme="dark"] .hljs-deletion { color: #ffa198; background: rgb(248 81 
   html:not([data-theme="light"]):not([data-theme="dark"]) .hljs-symbol { color: #ffa657; }
 }
 
+/* ============================================================
+   PERSISTENT DRAWER NAVIGATION (Phase 2)
+   ============================================================ */
+.body { align-items: stretch; }
+
+.nav-container {
+  position: sticky;
+  top: var(--navbar-height);
+  align-self: flex-start;
+  width: var(--nav-width);
+  max-width: var(--nav-width);
+  flex: 0 0 var(--nav-width);
+  height: calc(100vh - var(--navbar-height));
+  padding: 0;
+  background: transparent;
+  border-right: 1px solid var(--color-border-secondary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-tertiary);
+}
+
+/* --- Drawer header: product switcher --- */
+.drawer-header {
+  flex: 0 0 auto;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid var(--color-border-secondary);
+  position: relative;
+}
+.drawer-product {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font: 500 13px/1.2 var(--font-body);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-default), border-color var(--dur-fast) var(--ease-default);
+  text-align: left;
+}
+.drawer-product:hover { background: var(--color-bg-secondary); border-color: var(--color-border-strong); }
+.drawer-product-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-secondary);
+  color: var(--color-fg-secondary);
+  flex: 0 0 auto;
+}
+.drawer-product-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drawer-product-chip {
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-secondary);
+  color: var(--color-text-tertiary);
+  font: 500 11px/1.3 var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+.drawer-product-caret { flex: 0 0 auto; color: var(--color-fg-tertiary); transition: transform var(--dur-fast) var(--ease-default); }
+.drawer-product[aria-expanded="true"] .drawer-product-caret { transform: rotate(180deg); }
+
+.drawer-product-menu {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: calc(100% - 6px);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 4px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.drawer-product-menu[hidden] { display: none; }
+.drawer-product-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--color-text-secondary);
+}
+.drawer-product-option:hover { background: var(--color-bg-secondary); color: var(--color-text-primary); text-decoration: none; }
+.drawer-product-option.is-current { background: var(--color-bg-secondary); color: var(--color-text-primary); }
+.drawer-product-option-name { font-weight: 500; font-size: 13px; }
+.drawer-product-option-meta { font-size: 12px; color: var(--color-text-quaternary); }
+
+/* --- Drawer body: scrollable tree --- */
+.drawer-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 10px 32px;
+  scrollbar-gutter: stable;
+}
+
+.nav-section { padding: 0; margin: 0; }
+.nav-section + .nav-section { margin-top: 18px; }
+.nav-section-title {
+  margin: 0;
+  padding: 10px 8px 6px;
+  font: 600 11px/1.2 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-quaternary);
+}
+
+.nav-tree,
+.drawer-body ul.nav-tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-tree li { margin: 0; padding: 0; }
+
+/* Nested trees: 1px indent guide line, identical to Untitled UI */
+.nav-tree .nav-tree {
+  margin-left: 14px;
+  padding-left: 10px;
+  border-left: 1px solid var(--color-border-secondary);
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+/* Links and parent rows look identical */
+.nav-link,
+.drawer-body .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  margin: 1px 0;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13.5px;
+  line-height: 20px;
+  transition: color var(--dur-fast) var(--ease-default), background var(--dur-fast) var(--ease-default);
+  cursor: pointer;
+  position: relative;
+}
+.nav-link:hover,
+.drawer-body .nav-link:hover {
+  color: var(--color-text-primary);
+  background: var(--color-bg-hover);
+  text-decoration: none;
+}
+
+/* Parent summary — remove native triangle; add a chevron */
+.nav-parent {
+  list-style: none;
+  padding-right: 6px;
+}
+.nav-parent::-webkit-details-marker { display: none; }
+.nav-parent::marker { content: ""; }
+.nav-parent::after {
+  content: "";
+  width: 14px; height: 14px;
+  margin-left: auto;
+  flex: 0 0 14px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'><polyline points='9 18 15 12 9 6'/></svg>") no-repeat center / 14px;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'><polyline points='9 18 15 12 9 6'/></svg>") no-repeat center / 14px;
+  opacity: 0.5;
+  transition: transform var(--dur-fast) var(--ease-default), opacity var(--dur-fast) var(--ease-default);
+}
+.nav-group[open] > .nav-parent::after { transform: rotate(90deg); opacity: 0.8; }
+.nav-parent:hover::after { opacity: 0.9; }
+.nav-parent span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Active + ancestor state */
+.nav-link.is-current {
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+  font-weight: 600;
+}
+.nav-link.is-ancestor {
+  color: var(--color-text-secondary);
+}
+.nav-link.is-current::before,
+.nav-tree .nav-tree .nav-link.is-current::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+}
+/* Top-level items get an inset rail instead */
+.drawer-body > .nav-section > .nav-tree > li > .nav-link.is-current::before {
+  left: -2px;
+}
+
+/* Focus */
+.nav-link:focus-visible,
+.drawer-product:focus-visible,
+.drawer-product-option:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 1px;
+}
+
+/* Hide the Antora-rendered "secondary" nav-explore panel inside drawer */
+.nav-panel-explore { display: none; }
+
+/* Mobile slide-over */
+@media (max-width: 1023px) {
+  .nav-container {
+    position: fixed;
+    inset: var(--navbar-height) auto 0 0;
+    z-index: 1000;
+    height: calc(100vh - var(--navbar-height));
+    background: var(--color-bg-primary);
+    transform: translateX(-100%);
+    transition: transform var(--dur-med) var(--ease-default);
+    border-right: 1px solid var(--color-border-secondary);
+    box-shadow: var(--shadow-xl);
+  }
+  html.is-drawer-open .nav-container { transform: translateX(0); }
+  html.is-drawer-open::before {
+    content: "";
+    position: fixed;
+    inset: var(--navbar-height) 0 0 0;
+    background: var(--color-bg-overlay);
+    z-index: 999;
+  }
+}
+
 /* FOUC guard for inline theme script */
 html.theme-ready { /* marker so we could animate transitions; kept empty for now */ }
