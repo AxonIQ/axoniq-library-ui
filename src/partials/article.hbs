@@ -12,7 +12,7 @@
         )
     </script>
 {{else}}
-    <article class="doc">
+    <article class="doc{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
         {{#with page.title}}
             {{#if (eq page.ingore-h1 'true')}}
             {{else}}
