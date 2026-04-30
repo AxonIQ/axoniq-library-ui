@@ -249,6 +249,22 @@ aside.nav {
   opacity: 1;
 }
 
+.advanced-framework {
+  white-space: nowrap;
+}
+
+.advanced-framework::after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.375em;
+  width: 0.8em;
+  height: 0.8em;
+  background-image: url('../img/axoniq-feature.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 @media (max-width: 820px) {
   .primary-footer {
     display: flex;
