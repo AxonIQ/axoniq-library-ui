@@ -10,31 +10,75 @@
       <span class="drawer-brand-label">Axoniq Documentation</span>
     </a>
 
-    <button type="button" class="drawer-product" id="drawer-product" aria-haspopup="listbox" aria-expanded="false">
+    <button type="button" class="drawer-product" id="drawer-product" aria-haspopup="menu" aria-expanded="false">
       <span class="drawer-product-icon" aria-hidden="true">
         <img src="{{uiRootPath}}/img/af5.svg" alt=""/>
       </span>
       <span class="drawer-product-name">Axon Framework</span>
-      <span class="drawer-product-chip">4.11</span>
+      <span class="drawer-product-chip">5.1</span>
       <svg class="drawer-product-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
-    <div class="drawer-product-menu" id="drawer-product-menu" role="listbox" hidden>
-      <a role="option" class="drawer-product-option is-current" href="{{{relativize '/axon-framework-reference/development/'}}}" data-product="af">
-        <span class="drawer-product-option-name">Axon Framework</span>
-        <span class="drawer-product-option-meta">4.11 · reference</span>
-      </a>
-      <a role="option" class="drawer-product-option" href="{{{relativize '/axon-server-reference/'}}}" data-product="as">
-        <span class="drawer-product-option-name">Axon Server</span>
-        <span class="drawer-product-option-meta">reference</span>
-      </a>
-      <a role="option" class="drawer-product-option" href="{{{relativize '/synapse-reference/'}}}" data-product="synapse">
-        <span class="drawer-product-option-name">Axon Synapse</span>
-        <span class="drawer-product-option-meta">reference</span>
-      </a>
-      <a role="option" class="drawer-product-option" href="{{{relativize '/axoniq-platform-reference/'}}}" data-product="platform">
-        <span class="drawer-product-option-name">AxonIQ Platform</span>
-        <span class="drawer-product-option-meta">reference</span>
-      </a>
+
+    {{!--
+      Product switcher: each product is a section (logo + name); versions are
+      the clickable items. Choosing a version navigates to that reference.
+      data-product-* on each section lets JS sync the header pill to the
+      version matching the current URL. See app.js "Product switcher".
+    --}}
+    <div class="drawer-product-menu" id="drawer-product-menu" role="menu" hidden>
+
+      <section class="product-group" data-product="af" data-product-name="Axon Framework" data-product-icon="img">
+        <header class="product-group-head">
+          <span class="product-group-icon"><img src="{{uiRootPath}}/img/af5.svg" alt=""/></span>
+          <span class="product-group-name">Axon Framework</span>
+        </header>
+        <ul class="product-versions">
+          <li><a role="menuitem" class="product-version is-current" data-version="5.1" href="{{{relativize '/axon-framework-reference/5.1/'}}}"><span class="pv-num">5.1</span><span class="pv-tag pv-tag--latest">Latest</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="5.0" href="{{{relativize '/axon-framework-reference/5.0/'}}}"><span class="pv-num">5.0</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="4.13" href="{{{relativize '/axon-framework-reference/4.13/'}}}"><span class="pv-num">4.13</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="4.12" href="{{{relativize '/axon-framework-reference/4.12/'}}}"><span class="pv-num">4.12</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="4.11" href="{{{relativize '/axon-framework-reference/4.11/'}}}"><span class="pv-num">4.11</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="4.10" href="{{{relativize '/axon-framework-reference/4.10/'}}}"><span class="pv-num">4.10</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="development" href="{{{relativize '/axon-framework-reference/development/'}}}"><span class="pv-num">development</span><span class="pv-tag pv-tag--dev">Dev</span></a></li>
+        </ul>
+      </section>
+
+      <section class="product-group" data-product="as" data-product-name="Axon Server" data-product-icon="img">
+        <header class="product-group-head">
+          <span class="product-group-icon"><img src="{{uiRootPath}}/img/axon-server.svg" alt=""/></span>
+          <span class="product-group-name">Axon Server</span>
+        </header>
+        <ul class="product-versions">
+          <li><a role="menuitem" class="product-version" data-version="2026.0" href="{{{relativize '/axon-server-reference/v2026.0/'}}}"><span class="pv-num">2026.0</span><span class="pv-tag pv-tag--latest">Latest</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="2025.2" href="{{{relativize '/axon-server-reference/v2025.2/'}}}"><span class="pv-num">2025.2</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="2025.1" href="{{{relativize '/axon-server-reference/v2025.1/'}}}"><span class="pv-num">2025.1</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="2025.0" href="{{{relativize '/axon-server-reference/v2025.0/'}}}"><span class="pv-num">2025.0</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="2024.2" href="{{{relativize '/axon-server-reference/v2024.2/'}}}"><span class="pv-num">2024.2</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="2024.1" href="{{{relativize '/axon-server-reference/v2024.1/'}}}"><span class="pv-num">2024.1</span></a></li>
+          <li><a role="menuitem" class="product-version" data-version="development" href="{{{relativize '/axon-server-reference/development/'}}}"><span class="pv-num">development</span><span class="pv-tag pv-tag--dev">Dev</span></a></li>
+        </ul>
+      </section>
+
+      <section class="product-group" data-product="synapse" data-product-name="Axon Synapse" data-product-icon="synapse">
+        <header class="product-group-head">
+          <span class="product-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></span>
+          <span class="product-group-name">Axon Synapse</span>
+        </header>
+        <ul class="product-versions">
+          <li><a role="menuitem" class="product-version" data-version="reference" href="{{{relativize '/synapse-reference/'}}}"><span class="pv-num">Reference</span></a></li>
+        </ul>
+      </section>
+
+      <section class="product-group" data-product="platform" data-product-name="AxonIQ Platform" data-product-icon="platform">
+        <header class="product-group-head">
+          <span class="product-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></span>
+          <span class="product-group-name">AxonIQ Platform</span>
+        </header>
+        <ul class="product-versions">
+          <li><a role="menuitem" class="product-version" data-version="reference" href="{{{relativize '/axoniq-platform-reference/'}}}"><span class="pv-num">Reference</span></a></li>
+        </ul>
+      </section>
+
     </div>
   </div>
 

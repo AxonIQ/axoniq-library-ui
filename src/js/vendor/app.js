@@ -79,6 +79,40 @@
     var productBtn = document.getElementById('drawer-product')
     var productMenu = document.getElementById('drawer-product-menu')
     if (productBtn && productMenu) {
+      // Highlight the version matching the current URL and sync the header pill
+      // to that product + version. Falls back to the pre-marked default.
+      var versions = productMenu.querySelectorAll('.product-version')
+      var pathNow = location.pathname.replace(/\/+$/, '/') + (location.pathname.endsWith('/') ? '' : '/')
+      var currentVersion = null
+      var currentLen = -1
+      Array.prototype.forEach.call(versions, function (el) {
+        var href = el.getAttribute('href') || ''
+        // Strip relative prefixes so we compare on the meaningful path tail
+        var norm = href.replace(/^(\.\.\/)+/, '/').replace(/^\.\//, '/')
+        norm = norm.replace(/\/+$/, '/')
+        if (!norm.endsWith('/')) norm += '/'
+        if (pathNow.indexOf(norm.replace(/^\//, '')) >= 0 && norm.length > currentLen) {
+          currentVersion = el
+          currentLen = norm.length
+        }
+      })
+      if (currentVersion) {
+        Array.prototype.forEach.call(versions, function (el) { el.classList.remove('is-current') })
+        currentVersion.classList.add('is-current')
+        var group = currentVersion.closest('.product-group')
+        if (group) {
+          var name = group.getAttribute('data-product-name')
+          var icon = group.querySelector('.product-group-icon')
+          var num = currentVersion.querySelector('.pv-num')
+          var hdrName = productBtn.querySelector('.drawer-product-name')
+          var hdrChip = productBtn.querySelector('.drawer-product-chip')
+          var hdrIcon = productBtn.querySelector('.drawer-product-icon')
+          if (hdrName && name) hdrName.textContent = name
+          if (hdrChip && num) hdrChip.textContent = num.textContent
+          if (hdrIcon && icon) hdrIcon.innerHTML = icon.innerHTML
+        }
+      }
+
       function closeProduct () {
         productBtn.setAttribute('aria-expanded', 'false')
         productMenu.hidden = true
