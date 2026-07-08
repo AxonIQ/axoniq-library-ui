@@ -418,7 +418,7 @@ html[data-theme="dark"] {
 
   --color-text-primary:       var(--color-neutral-50);
   --color-text-secondary:     var(--color-neutral-200);
-  --color-text-tertiary:      var(--color-neutral-400);
+  --color-text-tertiary:      var(--color-neutral-200);
   --color-text-quaternary:    var(--color-neutral-500);
   --color-text-placeholder:   var(--color-neutral-500);
   --color-text-brand-primary: var(--color-neutral-50);
@@ -498,7 +498,7 @@ html[data-theme="dark"] {
 
     --color-text-primary:       var(--color-neutral-50);
     --color-text-secondary:     var(--color-neutral-200);
-    --color-text-tertiary:      var(--color-neutral-400);
+    --color-text-tertiary:      var(--color-neutral-200);
     --color-text-quaternary:    var(--color-neutral-500);
     --color-text-placeholder:   var(--color-neutral-500);
     --color-text-brand-primary: var(--color-neutral-50);
