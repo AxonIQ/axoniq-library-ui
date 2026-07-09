@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {{> head defaultPageTitle='Untitled'}}
+    <script>(function(){try{var t=localStorage.getItem('axoniq-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+    {{> head defaultPageTitle='AxonIQ Docs'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}} component-list">
-    <div class="header_container">
-      {{> banner}}
-      {{> header}}
-      {{> toolbar}}
-    </div>
     <div class="content_container">
-      {{> "component-list|body"}}
+      {{> banner}}
+      {{> topbar}}
+      <div class="body">
+        {{> nav}}
+        {{> "component-list|main"}}
+      </div>
       {{> footer}}
     </div>
+    {{> cmdk}}
   </body>
 </html>
