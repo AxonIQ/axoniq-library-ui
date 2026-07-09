@@ -86,6 +86,164 @@
   })()
 
   // ============================================================
+  // Nav drawer: active path, details persistence, product switcher
+  // ============================================================
+  var drawer = document.querySelector('.drawer')
+  if (drawer) {
+    var path = location.pathname.replace(/\/+$/, '/') // normalise trailing slash
+    if (!path.endsWith('/')) path += '/'
+    var all = drawer.querySelectorAll('.nav-link')
+    var bestMatch = null
+    var bestLen = -1
+
+    Array.prototype.forEach.call(all, function (el) {
+      var href = el.getAttribute('data-href')
+      if (!href) return
+      var norm = href.endsWith('/') ? href : href + '/'
+      if (path === norm || path === norm.replace(/\/$/, '')) {
+        if (norm.length > bestLen) { bestMatch = el; bestLen = norm.length }
+      }
+    })
+
+    // Fallback: longest prefix match
+    if (!bestMatch) {
+      Array.prototype.forEach.call(all, function (el) {
+        var href = el.getAttribute('data-href')
+        if (!href) return
+        var norm = href.endsWith('/') ? href : href + '/'
+        if (path.indexOf(norm) === 0 && norm.length > bestLen) {
+          bestMatch = el; bestLen = norm.length
+        }
+      })
+    }
+
+    if (bestMatch) {
+      bestMatch.classList.add('is-current')
+      // Walk up: open every ancestor <details> and mark summaries as ancestors
+      var node = bestMatch.parentElement
+      while (node && node !== drawer) {
+        if (node.tagName === 'DETAILS') {
+          node.open = true
+          var sum = node.querySelector(':scope > summary.nav-link')
+          if (sum && sum !== bestMatch) sum.classList.add('is-ancestor')
+        }
+        node = node.parentElement
+      }
+      // Scroll into view within drawer body
+      setTimeout(function () {
+        var body = drawer.querySelector('.drawer-body')
+        if (!body) return
+        var r = bestMatch.getBoundingClientRect()
+        var br = body.getBoundingClientRect()
+        if (r.top < br.top || r.bottom > br.bottom) {
+          body.scrollTop += r.top - br.top - 80
+        }
+      }, 0)
+    }
+
+    // Persist details open/closed state
+    var STORAGE_KEY = 'axoniq-nav-open'
+    var openSet = {}
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY)
+      if (raw) openSet = JSON.parse(raw) || {}
+    } catch (e) {}
+
+    Array.prototype.forEach.call(drawer.querySelectorAll('details[data-nav-id]'), function (d) {
+      var id = d.getAttribute('data-nav-id')
+      // Only restore if user hasn't just been marked as ancestor (already open)
+      if (!d.open && openSet[id]) d.open = true
+      d.addEventListener('toggle', function () {
+        openSet[id] = d.open
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(openSet)) } catch (e) {}
+      })
+    })
+
+    // Product switcher popover
+    var productBtn = document.getElementById('drawer-product')
+    var productMenu = document.getElementById('drawer-product-menu')
+    if (productBtn && productMenu) {
+      // Highlight the version matching the current URL and sync the header pill
+      // to that product + version. Falls back to the pre-marked default.
+      var versions = productMenu.querySelectorAll('.product-version')
+      var pathNow = location.pathname.replace(/\/+$/, '/') + (location.pathname.endsWith('/') ? '' : '/')
+      var currentVersion = null
+      var currentLen = -1
+      Array.prototype.forEach.call(versions, function (el) {
+        var href = el.getAttribute('href') || ''
+        // Strip relative prefixes so we compare on the meaningful path tail
+        var norm = href.replace(/^(\.\.\/)+/, '/').replace(/^\.\//, '/')
+        norm = norm.replace(/\/+$/, '/')
+        if (!norm.endsWith('/')) norm += '/'
+        if (pathNow.indexOf(norm.replace(/^\//, '')) >= 0 && norm.length > currentLen) {
+          currentVersion = el
+          currentLen = norm.length
+        }
+      })
+      if (currentVersion) {
+        Array.prototype.forEach.call(versions, function (el) { el.classList.remove('is-current') })
+        currentVersion.classList.add('is-current')
+        var group = currentVersion.closest('.product-group')
+        if (group) {
+          var name = group.getAttribute('data-product-name')
+          var icon = group.querySelector('.product-group-icon')
+          var num = currentVersion.querySelector('.pv-num')
+          var hdrName = productBtn.querySelector('.drawer-product-name')
+          var hdrChip = productBtn.querySelector('.drawer-product-chip')
+          var hdrIcon = productBtn.querySelector('.drawer-product-icon')
+          if (hdrName && name) hdrName.textContent = name
+          if (hdrChip && num) hdrChip.textContent = num.textContent
+          if (hdrIcon && icon) hdrIcon.innerHTML = icon.innerHTML
+        }
+      }
+
+      function closeProduct () {
+        productBtn.setAttribute('aria-expanded', 'false')
+        productMenu.hidden = true
+      }
+      function openProduct () {
+        productBtn.setAttribute('aria-expanded', 'true')
+        productMenu.hidden = false
+      }
+      productBtn.addEventListener('click', function (e) {
+        e.stopPropagation()
+        productMenu.hidden ? openProduct() : closeProduct()
+      })
+      document.addEventListener('click', function (e) {
+        if (productMenu.hidden) return
+        if (!productMenu.contains(e.target) && e.target !== productBtn) closeProduct()
+      })
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !productMenu.hidden) closeProduct()
+      })
+    }
+
+    // Mobile drawer toggle (off-canvas drawer + scrim)
+    var burger = document.getElementById('drawer-burger')
+    var scrim = document.getElementById('drawer-scrim')
+    function openDrawer () {
+      document.documentElement.classList.add('is-drawer-open')
+      if (burger) burger.setAttribute('aria-expanded', 'true')
+    }
+    function closeDrawer () {
+      document.documentElement.classList.remove('is-drawer-open')
+      if (burger) burger.setAttribute('aria-expanded', 'false')
+    }
+    if (burger) {
+      burger.addEventListener('click', function () {
+        if (document.documentElement.classList.contains('is-drawer-open')) closeDrawer()
+        else openDrawer()
+      })
+    }
+    if (scrim) scrim.addEventListener('click', closeDrawer)
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer() })
+    // Close on any real link click (mobile)
+    drawer.addEventListener('click', function (e) {
+      if (e.target.closest('.nav-link:not(.nav-parent)')) closeDrawer()
+    })
+  }
+
+  // ============================================================
   // Theme toggle
   // ============================================================
   var themeBtn = document.getElementById('theme-toggle')
