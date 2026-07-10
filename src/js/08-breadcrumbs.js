@@ -37,7 +37,6 @@
 
   function buildTrail (leaf) {
     var trail = []
-    var current = leaf
     if (leaf.tagName === 'A') {
       trail.push({ text: labelText(leaf), href: hrefForLink(leaf) })
     }
