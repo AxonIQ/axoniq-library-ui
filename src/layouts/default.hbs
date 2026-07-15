@@ -5,6 +5,7 @@
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
     <div class="header_container">
+      {{> banner}}
       {{> header}}
       {{> toolbar}}
     </div>
