@@ -342,6 +342,36 @@
   }
 
   // ============================================================
+  // Theme switch (light / dark / auto — topbar)
+  // ============================================================
+  var themeSwitchBtns = document.querySelectorAll('.theme-switch-btn')
+  if (themeSwitchBtns.length) {
+    function currentThemeChoice () {
+      var current = document.documentElement.getAttribute('data-theme')
+      return current === 'light' || current === 'dark' ? current : 'auto'
+    }
+    function markActiveThemeBtn () {
+      var choice = currentThemeChoice()
+      Array.prototype.forEach.call(themeSwitchBtns, function (btn) {
+        var isActive = btn.getAttribute('data-theme-choice') === choice
+        btn.classList.toggle('is-active', isActive)
+        btn.setAttribute('aria-pressed', String(isActive))
+      })
+    }
+    Array.prototype.forEach.call(themeSwitchBtns, function (btn) {
+      btn.addEventListener('click', function () {
+        var choice = btn.getAttribute('data-theme-choice')
+        var html = document.documentElement
+        if (choice === 'auto') html.removeAttribute('data-theme')
+        else html.setAttribute('data-theme', choice)
+        try { localStorage.setItem('axoniq-theme', choice) } catch (e) {}
+        markActiveThemeBtn()
+      })
+    })
+    markActiveThemeBtn()
+  }
+
+  // ============================================================
   // Command palette (⌘K) — backed by the real Lunr index
   // ============================================================
   function docIcon () {

@@ -1942,6 +1942,43 @@ html[data-theme="dark"] .drawer-brand-logo { filter: invert(1) brightness(1.1); 
   text-overflow: ellipsis;
 }
 
+/* Theme switcher: light / dark / auto, shown together (topbar) */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 34px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.theme-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 100%;
+  border: 0;
+  border-left: 1px solid var(--color-border-primary);
+  background: var(--color-bg-primary);
+  color: var(--color-fg-tertiary);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-default), color var(--dur-fast) var(--ease-default);
+}
+
+.theme-switch-btn:first-child { border-left: 0; }
+
+.theme-switch-btn:hover {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.theme-switch-btn.is-active {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
 .topbar-search {
   display: flex;
   align-items: center;
