@@ -7,9 +7,11 @@
   results in our ⌘K palette (app.js defines window.antoraSearch.initSearch).
   We deliberately do NOT include the extension's {{> search-scripts}} partial,
   because its search-ui.js binds to a #search-input we no longer render.
-  Order: lunr.js (defines lunr) → app.js (defines the hook, deferred) →
-  search-index.js (deferred, calls the hook). Deferred scripts run in order.
+  Order: lunr.js (defines lunr) → app.js (blocking; also sets up the active-path
+  nav state synchronously, before first paint, to avoid a visible scroll jump —
+  see #cmdk-* below, which is why {{> cmdk}} now renders before this partial) →
+  search-index.js (deferred, calls the hook app.js just defined).
 --}}
 <script src="{{{uiRootPath}}}/js/vendor/lunr.js"></script>
-<script defer src="{{{uiRootPath}}}/js/vendor/app.js"></script>
+<script src="{{{uiRootPath}}}/js/vendor/app.js"></script>
 <script defer src="{{{siteRootPath}}}/search-index.js"></script>

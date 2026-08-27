@@ -96,14 +96,52 @@
     var bestMatch = null
     var bestLen = -1
 
-    Array.prototype.forEach.call(all, function (el) {
-      var href = el.getAttribute('data-href')
-      if (!href) return
-      var norm = href.endsWith('/') ? href : href + '/'
-      if (path === norm || path === norm.replace(/\/$/, '')) {
-        if (norm.length > bestLen) { bestMatch = el; bestLen = norm.length }
-      }
+    function normHref (href) { return href.endsWith('/') ? href : href + '/' }
+
+    // Some pages are intentionally linked from more than one place in the tree
+    // (e.g. a full product tree AND a themed "Core concepts" section). Remember
+    // exactly which occurrence was clicked, in sessionStorage, so the next page
+    // load lands on and scrolls to THAT occurrence rather than always the
+    // first one in document order.
+    var CLICK_KEY = 'axoniq-nav-click'
+    Array.prototype.forEach.call(all, function (el, elIdx) {
+      el.addEventListener('click', function () {
+        var href = el.getAttribute('data-href')
+        if (!href) return
+        var norm = normHref(href)
+        var index = 0
+        for (var i = 0; i < elIdx; i++) {
+          var otherHref = all[i].getAttribute('data-href')
+          if (otherHref && normHref(otherHref) === norm) index++
+        }
+        try { sessionStorage.setItem(CLICK_KEY, JSON.stringify({ href: norm, index: index })) } catch (e) {}
+      })
     })
+
+    try {
+      var clicked = JSON.parse(sessionStorage.getItem(CLICK_KEY) || 'null')
+      sessionStorage.removeItem(CLICK_KEY)
+      if (clicked && clicked.href && (path === clicked.href || path === clicked.href.replace(/\/$/, ''))) {
+        var occurrence = 0
+        Array.prototype.forEach.call(all, function (el) {
+          if (bestMatch) return
+          var href = el.getAttribute('data-href')
+          if (!href || normHref(href) !== clicked.href) return
+          if (occurrence++ === clicked.index) { bestMatch = el; bestLen = clicked.href.length }
+        })
+      }
+    } catch (e) {}
+
+    if (!bestMatch) {
+      Array.prototype.forEach.call(all, function (el) {
+        var href = el.getAttribute('data-href')
+        if (!href) return
+        var norm = normHref(href)
+        if (path === norm || path === norm.replace(/\/$/, '')) {
+          if (norm.length > bestLen) { bestMatch = el; bestLen = norm.length }
+        }
+      })
+    }
 
     // Fallback: longest prefix match
     if (!bestMatch) {
@@ -129,19 +167,10 @@
         }
         node = node.parentElement
       }
-      // Scroll into view within drawer body
-      setTimeout(function () {
-        var body = drawer.querySelector('.drawer-body')
-        if (!body) return
-        var r = bestMatch.getBoundingClientRect()
-        var br = body.getBoundingClientRect()
-        if (r.top < br.top || r.bottom > br.bottom) {
-          body.scrollTop += r.top - br.top - 80
-        }
-      }, 0)
     }
 
-    // Persist details open/closed state
+    // Persist details open/closed state + accordion (opening an item collapses
+    // its siblings at the same level, matching the pre-restyle nav)
     var STORAGE_KEY = 'axoniq-nav-open'
     var openSet = {}
     try {
@@ -149,15 +178,67 @@
       if (raw) openSet = JSON.parse(raw) || {}
     } catch (e) {}
 
+    // Top-level items live inside their own curated <section class="nav-section">
+    // (see nav-manifest.js), so different top-level entries sit in different
+    // <ul> lists even though they're visually siblings in the drawer. Treat all
+    // of them as one accordion group, drawer-wide; below the top level, scope
+    // to true DOM siblings (the same parent <ul>) as usual.
+    function isTopLevel (d) {
+      var ul = d.parentElement && d.parentElement.parentElement
+      return !!(ul && ul.parentElement && ul.parentElement.classList.contains('nav-section'))
+    }
+
+    function closeOpenSiblings (d) {
+      if (isTopLevel(d)) {
+        Array.prototype.forEach.call(drawer.querySelectorAll('.nav-section > .nav-tree > li > details.nav-group'), function (sibling) {
+          if (sibling !== d && sibling.open) sibling.open = false
+        })
+        return
+      }
+      var li = d.parentElement
+      var ul = li && li.parentElement
+      if (!ul) return
+      Array.prototype.forEach.call(ul.children, function (siblingLi) {
+        if (siblingLi === li) return
+        var sibling = siblingLi.querySelector(':scope > details.nav-group')
+        if (sibling && sibling.open) sibling.open = false
+      })
+    }
+
+    // True only while the block below opens the current page's ancestor chain
+    // and restores previously-persisted sections — both are programmatic and
+    // must not trigger accordion-collapsing against each other. Only genuine
+    // user clicks (after this pass) should collapse siblings.
+    var initializingNav = true
+
     Array.prototype.forEach.call(drawer.querySelectorAll('details[data-nav-id]'), function (d) {
       var id = d.getAttribute('data-nav-id')
       // Only restore if user hasn't just been marked as ancestor (already open)
       if (!d.open && openSet[id]) d.open = true
       d.addEventListener('toggle', function () {
+        if (!initializingNav && d.open) closeOpenSiblings(d)
         openSet[id] = d.open
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(openSet)) } catch (e) {}
       })
     })
+
+    initializingNav = false
+
+    // Scroll the current page into view within the drawer body. Done
+    // synchronously (no setTimeout) and after the open-state restore above, so
+    // it measures the tree in its final, fully-settled state and applies
+    // before first paint — a deferred correction was visible as a jump once
+    // the page had already painted at scrollTop 0.
+    if (bestMatch) {
+      var drawerBody = drawer.querySelector('.drawer-body')
+      if (drawerBody) {
+        var bmRect = bestMatch.getBoundingClientRect()
+        var bodyRect = drawerBody.getBoundingClientRect()
+        if (bmRect.top < bodyRect.top || bmRect.bottom > bodyRect.bottom) {
+          drawerBody.scrollTop += bmRect.top - bodyRect.top - 80
+        }
+      }
+    }
 
     // Product switcher popover
     var productBtn = document.getElementById('drawer-product')
