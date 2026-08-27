@@ -1739,10 +1739,13 @@ html[data-theme="dark"] .drawer-brand-logo { filter: invert(1) brightness(1.1); 
   padding: 0;
 }
 
-/* Nested trees: 1px indent guide line, identical to Untitled UI */
-.nav-tree .nav-tree {
-  margin-left: 14px;
-  padding-left: 10px;
+/* Nested trees: 1px indent guide line, identical to Untitled UI.
+   Scoped under .drawer-body (3 classes) so this reliably beats the list-reset
+   rule above (.drawer-body ul.nav-tree — 2 classes + 1 type is more specific
+   than a plain .nav-tree .nav-tree would be, and was silently winning). */
+.drawer-body .nav-tree .nav-tree {
+  margin-left: 8px;
+  padding-left: 6px;
   border-left: 1px solid var(--color-border-secondary);
   margin-top: 2px;
   margin-bottom: 4px;
@@ -2060,15 +2063,6 @@ main { padding-top: 40px; }
 /* ============================================================
    DRAWER DEEP-NESTING EMPHASIS
    ============================================================ */
-/* Phase 3 override of earlier .nav-tree .nav-tree spacing */
-/* stylelint-disable-next-line no-duplicate-selectors */
-.nav-tree .nav-tree {
-  margin-left: 14px;
-  padding-left: 16px;
-  margin-top: 4px;
-  margin-bottom: 6px;
-}
-
 .nav-tree .nav-tree .nav-link {
   font-size: 13px;
   padding: 5px 10px;
