@@ -9,6 +9,18 @@ body {
   color: var(--color-text-secondary);
 }
 
+/* Always reserve the vertical scrollbar's width, rather than only when the
+   page is currently tall enough to scroll. Without this, right-aligned fixed/
+   sticky content (topbar search, the accent line, etc.) is laid out against
+   a width that can silently change by the scrollbar's width depending on
+   content height, causing it to visually overlap a scrollbar that appears
+   later — most reliably reproduced via a browser's device-toolbar responsive
+   mode, which reserves scrollbar space unconditionally. Unsupported browsers
+   (e.g. Safari) simply ignore this and keep today's behavior. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Layout: no top header, drawer flush-left, content centered */
 :root {
   --navbar-height: 0;
