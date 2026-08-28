@@ -35,7 +35,11 @@
       <span class="drawer-product-chip">{{#with (lookup site.components 'axon-framework-reference')}}{{latest.displayVersion}}{{/with}}</span>
       {{else}}
       <span class="drawer-product-icon" aria-hidden="true">
-        <img src="{{uiRootPath}}/img/logo.svg" alt=""/>
+        {{!-- Same asset + dark-mode invert as .drawer-brand-logo above — it's
+          a solid dark mark, invisible against the dark theme's near-black
+          background without it. drawer-product-icon img's sizing wins on
+          specificity, so reusing the class only picks up the filter. --}}
+        <img src="{{uiRootPath}}/img/logo.svg" class="drawer-brand-logo" alt=""/>
       </span>
       <span class="drawer-product-name">Documentation</span>
       {{/if}}
