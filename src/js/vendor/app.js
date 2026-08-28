@@ -300,6 +300,10 @@
       function openProduct () {
         productBtn.setAttribute('aria-expanded', 'true')
         productMenu.hidden = false
+        // role="menu"/role="menuitem" implies arrow-key navigation among the
+        // items; land on the current version if there is one, else the first.
+        var toFocus = productMenu.querySelector('.product-version.is-current') || productMenu.querySelector('.product-version')
+        if (toFocus) toFocus.focus()
       }
       productBtn.addEventListener('click', function (e) {
         e.stopPropagation()
@@ -310,7 +314,24 @@
         if (!productMenu.contains(e.target) && e.target !== productBtn) closeProduct()
       })
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !productMenu.hidden) closeProduct()
+        if (productMenu.hidden) return
+        if (e.key === 'Escape') { closeProduct(); return }
+        var items = Array.prototype.slice.call(productMenu.querySelectorAll('.product-version'))
+        if (!items.length) return
+        var idx = items.indexOf(document.activeElement)
+        if (e.key === 'ArrowDown') {
+          e.preventDefault()
+          items[(idx + 1 + items.length) % items.length].focus()
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault()
+          items[(idx - 1 + items.length) % items.length].focus()
+        } else if (e.key === 'Home') {
+          e.preventDefault()
+          items[0].focus()
+        } else if (e.key === 'End') {
+          e.preventDefault()
+          items[items.length - 1].focus()
+        }
       })
     }
 
@@ -486,7 +507,10 @@
     window.location.href = item.url
   }
 
+  var lastFocusedBeforeOpen = null
+
   function open () {
+    lastFocusedBeforeOpen = document.activeElement
     overlay.classList.add('is-open')
     overlay.setAttribute('aria-hidden', 'false')
     document.documentElement.classList.add('is-cmdk-open')
@@ -498,6 +522,8 @@
     overlay.classList.remove('is-open')
     overlay.setAttribute('aria-hidden', 'true')
     document.documentElement.classList.remove('is-cmdk-open')
+    if (lastFocusedBeforeOpen && typeof lastFocusedBeforeOpen.focus === 'function') lastFocusedBeforeOpen.focus()
+    lastFocusedBeforeOpen = null
   }
 
   if (launch) launch.addEventListener('click', open)
@@ -528,6 +554,14 @@
     }
     if (!overlay.classList.contains('is-open')) return
     if (e.key === 'Escape') { close(); return }
+    if (e.key === 'Tab') {
+      // #cmdk-input is the only focusable/tabbable element in the dialog
+      // (result items are non-tabbable divs, navigated via Up/Down instead) —
+      // trap focus there instead of letting Tab escape to the page behind it.
+      e.preventDefault()
+      input.focus()
+      return
+    }
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (flat.length) { selected = (selected + 1) % flat.length; updateSelection() }
