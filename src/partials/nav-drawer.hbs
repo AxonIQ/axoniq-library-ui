@@ -18,11 +18,27 @@
     </a>
 
     <button type="button" class="drawer-product" id="drawer-product" aria-haspopup="menu" aria-expanded="false">
+      {{!--
+        Static default, shown until app.js finds a matching version link for
+        the current URL and overrides it (which it always does on a real
+        reference page). On a page with no version at all (Basics, Guides,
+        Getting Started — asciidoc.attributes.type is not 'reference' there),
+        no match will ever be found, so this default is what actually shows —
+        make it an honest neutral state rather than a specific, misleading
+        product+version that has nothing to do with the page being read.
+      --}}
+      {{#if (or (eq page.componentVersion.asciidoc.attributes.type 'reference') (eq page.componentVersion.asciidoc.attributes.type 'extension-reference'))}}
       <span class="drawer-product-icon" aria-hidden="true">
         <img src="{{uiRootPath}}/img/af5.svg" alt=""/>
       </span>
       <span class="drawer-product-name">Axon Framework</span>
       <span class="drawer-product-chip">{{#with (lookup site.components 'axon-framework-reference')}}{{latest.displayVersion}}{{/with}}</span>
+      {{else}}
+      <span class="drawer-product-icon" aria-hidden="true">
+        <img src="{{uiRootPath}}/img/logo.svg" alt=""/>
+      </span>
+      <span class="drawer-product-name">Documentation</span>
+      {{/if}}
       <svg class="drawer-product-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
 
@@ -91,6 +107,16 @@
         </ul>
       </section>
       {{/if}}
+
+      {{!--
+        Extensions: one flat product-group per extension component, generated
+        at build time by nav-assembler.js (see nav-extension-products.hbs) —
+        reuses the same *-extension-reference name match already driving the
+        nav tree's own "Extensions" section, instead of a second hand-
+        maintained list that could drift out of sync with it.
+      --}}
+      <div class="product-menu-divider">Extensions</div>
+      {{> nav-extension-products}}
 
     </div>
   </div>
