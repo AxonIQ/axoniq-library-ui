@@ -835,9 +835,27 @@ nav.pagination a {
   font-weight: 600;
   text-decoration: none;
   line-height: 1.4;
+  /* Override body's global word-wrap: anywhere (base.css) — that's a safety
+     net for unbreakable long strings (URLs, code), but here it breaks
+     ordinary page titles mid-word (e.g. "Annotations" -> "Annotatio-ns")
+     whenever the card is a bit narrow. Titles are prose; wrap at spaces. */
+  overflow-wrap: normal;
+  word-break: normal;
 }
 nav.pagination .next a { flex-direction: row; }
 nav.pagination .prev a { flex-direction: row; }
+/* The legacy pagination.css rule "nav.pagination span { display:flex; flex:50%;
+   flex-direction:column }" is only meant for the top-level .prev/.next cards,
+   but its bare `span` selector also matches .advanced-framework nested inside
+   a pagination link — forcing it into a column flex container, so its text
+   and trailing ::after icon become two stacked flex items instead of one
+   inline run. Reset it back to an inline row here. */
+nav.pagination .advanced-framework {
+  display: inline-flex;
+  flex: initial;
+  flex-direction: row;
+  align-items: center;
+}
 nav.pagination a:hover { text-decoration: underline; }
 /* Put chevrons inline with the title, not absolutely positioned over the border */
 nav.pagination a::before,
