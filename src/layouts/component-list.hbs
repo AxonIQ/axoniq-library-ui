@@ -7,6 +7,9 @@
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}} component-list">
     <div class="content_container">
       {{> banner}}
+      {{!-- Keep --banner-height in sync with .banner's real (possibly
+        wrapped) height — see default.hbs for the full rationale. --}}
+      <script>(function(){var b=document.querySelector('.banner');if(b)document.documentElement.style.setProperty('--banner-height',b.offsetHeight+'px');})();</script>
       {{> topbar}}
       <div class="body">
         {{> nav}}

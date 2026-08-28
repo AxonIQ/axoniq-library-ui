@@ -2,6 +2,21 @@
   'use strict'
 
   // ============================================================
+  // Keep --banner-height in sync with .banner's real (possibly wrapped)
+  // height on resize. The initial value is set by an inline script right
+  // after .banner in the layout (before this file, which loads at the end of
+  // body, even runs) — this only handles it changing after load, e.g. a
+  // viewport resize or orientation change causing the banner text to
+  // rewrap to a different number of lines.
+  // ============================================================
+  var bannerEl = document.querySelector('.banner')
+  if (bannerEl) {
+    window.addEventListener('resize', function () {
+      document.documentElement.style.setProperty('--banner-height', bannerEl.offsetHeight + 'px')
+    })
+  }
+
+  // ============================================================
   // Search: reuse the Lunr index built by @antora/lunr-extension,
   // but render the results in our ⌘K palette. The generated
   // search-index.js calls window.antoraSearch.initSearch(lunr, data),
