@@ -11,7 +11,7 @@
   ;[].slice.call(headings).forEach(function (heading) {
     var img = document.createElement('img')
     img.src = uiRootPath + '/img/axoniq-feature.svg'
-    img.alt = 'AxonIQ feature indicator'
+    img.alt = 'Axoniq feature indicator'
     img.className = 'axoniq-feature-icon'
 
     var link = document.createElement('a')
