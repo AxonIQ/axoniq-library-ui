@@ -27,6 +27,28 @@ body {
 
 .drawer-toggle { display: none; }
 
+/* Accent line: a scalable CSS recreation of the old bg-header.png glow
+   (orange -> blue), as a crisp gradient bar. .banner is `position: fixed`
+   (removed from document flow entirely, anchored to the real viewport top),
+   and .nav-container/.topbar independently anchor to `top: var(--banner-
+   height)` rather than relying on document flow — so .header_container
+   itself has no real footprint to attach this to. Use a fixed pseudo-element
+   anchored the same way nav-container/topbar already are, spanning the full
+   viewport width above both (z-index between topbar/nav-container's 30/40
+   and the banner's 56, since it sits at a different y-offset than the banner
+   and never needs to compete with it directly). */
+.content_container::before {
+  content: "";
+  position: fixed;
+  top: var(--banner-height);
+  left: 0;
+  width: 100%;
+  height: 5px;
+  z-index: 45;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, var(--color-orange-500), var(--color-blue-500));
+}
+
 /* Theme toggle (now in drawer footer) */
 .icon-btn {
   display: inline-flex;
