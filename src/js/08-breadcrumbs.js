@@ -39,6 +39,13 @@
     var trail = []
     if (leaf.tagName === 'A') {
       trail.push({ text: labelText(leaf), href: hrefForLink(leaf) })
+    } else if (leaf.tagName === 'SUMMARY') {
+      // The active page can itself be a nav-group parent (has its own page
+      // AND children, e.g. "Axon Framework" or an extension's own landing
+      // page) — its own label was silently dropped since only <a> leaves
+      // were pushed here. render() already renders the last trail item as
+      // plain text regardless of href, so there's nothing to link to here.
+      trail.push({ text: labelText(leaf), href: null })
     }
     // Walk up through <details> parents and the <section>
     var node = leaf.closest('details')
