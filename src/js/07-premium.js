@@ -1,6 +1,6 @@
 ;(function () {
   'use strict'
-
+  // TODO this needs to unify with 07-axoniq-feature.js functionality
   // Premium = Axoniq Framework exclusive. Three placement modes:
   //   1. data-premium="category" on a nav <section> → mark the section title
   //   2. data-premium="route"    on a nav <a>       → mark the link (right side)
