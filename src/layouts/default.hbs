@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {{> head defaultPageTitle='Untitled'}}
+    <script>(function(){try{var t=localStorage.getItem('axoniq-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+    {{> head defaultPageTitle='Axoniq Docs'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}}">
     <div class="header_container">
       {{> banner}}
-      {{> header}}
-      {{> toolbar}}
     </div>
+    {{!--
+      .banner is position:fixed with wrapping text (LTS notices etc.) — its
+      real rendered height depends on how many lines it wraps to, which
+      depends on viewport width and copy length. .nav-container/.topbar (and
+      the topbar accent line) anchor to --banner-height rather than normal
+      document flow, so keep that variable in sync with reality here, right
+      after .banner exists but before anything anchored to it is painted.
+      app.js re-measures on resize.
+    --}}
+    <script>(function(){var b=document.querySelector('.banner');if(b)document.documentElement.style.setProperty('--banner-height',b.offsetHeight+'px');})();</script>
     <div class="content_container">
+      {{> topbar}}
       {{> body}}
+      {{> cmdk}}
       {{> footer}}
     </div>
   </body>

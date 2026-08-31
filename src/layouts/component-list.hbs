@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {{> head defaultPageTitle='Untitled'}}
+    <script>(function(){try{var t=localStorage.getItem('axoniq-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+    {{> head defaultPageTitle='Axoniq Docs'}}
   </head>
   <body class="article{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}} component-list">
-    <div class="header_container">
-      {{> banner}}
-      {{> header}}
-      {{> toolbar}}
-    </div>
     <div class="content_container">
-      {{> "component-list|body"}}
+      {{> banner}}
+      {{!-- Keep --banner-height in sync with .banner's real (possibly
+        wrapped) height — see default.hbs for the full rationale. --}}
+      <script>(function(){var b=document.querySelector('.banner');if(b)document.documentElement.style.setProperty('--banner-height',b.offsetHeight+'px');})();</script>
+      {{> topbar}}
+      <div class="body">
+        {{> nav}}
+        {{> "component-list|main"}}
+      </div>
+      {{> cmdk}}
       {{> footer}}
     </div>
   </body>

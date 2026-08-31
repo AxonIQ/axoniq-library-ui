@@ -1,0 +1,139 @@
+{{!--
+  Persistent drawer nav. Fully data-driven:
+   - header: brand + product/version switcher. Products are a small editorial
+     mapping (name + logo); VERSIONS are pulled dynamically from Antora's
+     site.components, so new releases appear automatically.
+   - body: {{> nav-generated}} — the nav tree, assembled at build time by the
+     `nav-assembler` Antora extension from nav-manifest.js + each component's
+     nav.adoc.
+   - footer: Axoniq Platform link (theme switcher now lives in the topbar).
+  app.js syncs the header pill to the version matching the current URL and marks
+  the active version; nothing here is hand-maintained per release.
+--}}
+<nav class="drawer" id="drawer" aria-label="Documentation navigation">
+  <div class="drawer-header">
+    <a class="drawer-brand" href="{{{or site.url siteRootPath}}}" aria-label="Axoniq Docs home">
+      <img src="{{uiRootPath}}/img/logo.svg" class="drawer-brand-logo" alt=""/>
+      <span class="drawer-brand-label">Axoniq Documentation</span>
+    </a>
+
+    <button type="button" class="drawer-product" id="drawer-product" aria-haspopup="menu" aria-expanded="false">
+      {{!--
+        Static default, shown until app.js finds a matching version link for
+        the current URL and overrides it (which it always does on a real
+        reference page). On a page with no version at all (Basics, Guides,
+        Getting Started — asciidoc.attributes.type is not 'reference' there),
+        no match will ever be found, so this default is what actually shows —
+        make it an honest neutral state rather than a specific, misleading
+        product+version that has nothing to do with the page being read.
+      --}}
+      {{#if (or (eq page.componentVersion.asciidoc.attributes.type 'reference') (eq page.componentVersion.asciidoc.attributes.type 'extension-reference'))}}
+      <span class="drawer-product-icon" aria-hidden="true">
+        <img src="{{uiRootPath}}/img/af5.svg" alt=""/>
+      </span>
+      <span class="drawer-product-name">Axon Framework</span>
+      <span class="drawer-product-chip">{{#with (lookup site.components 'axon-framework-reference')}}{{latest.displayVersion}}{{/with}}</span>
+      {{else}}
+      <span class="drawer-product-icon" aria-hidden="true">
+        {{!-- Same asset + dark-mode invert as .drawer-brand-logo above — it's
+          a solid dark mark, invisible against the dark theme's near-black
+          background without it. drawer-product-icon img's sizing wins on
+          specificity, so reusing the class only picks up the filter. --}}
+        <img src="{{uiRootPath}}/img/logo.svg" class="drawer-brand-logo" alt=""/>
+      </span>
+      <span class="drawer-product-name">Documentation</span>
+      {{/if}}
+      <svg class="drawer-product-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+
+    <div class="drawer-product-menu" id="drawer-product-menu" role="menu" hidden>
+
+      {{#if (lookup site.components 'axon-framework-reference')}}
+      <section class="product-group" data-product="af" data-product-name="Axon Framework" data-product-icon="img">
+        <header class="product-group-head">
+          <span class="product-group-icon"><img src="{{uiRootPath}}/img/af5.svg" alt=""/></span>
+          <span class="product-group-name">Axon Framework</span>
+        </header>
+        <ul class="product-versions">
+          {{#with (lookup site.components 'axon-framework-reference')}}
+          {{#each versions}}
+          <li><a role="menuitem" class="product-version" data-version="{{version}}" href="{{{relativize url}}}"><span class="pv-num">{{#if displayVersion}}{{displayVersion}}{{else}}{{#if version}}{{version}}{{else}}Reference{{/if}}{{/if}}</span>{{#if (eq version ../latest.version)}}<span class="pv-tag pv-tag--latest">Latest</span>{{/if}}{{#if prerelease}}<span class="pv-tag pv-tag--dev">Dev</span>{{/if}}</a></li>
+          {{/each}}
+          {{/with}}
+        </ul>
+      </section>
+      {{/if}}
+
+      {{#if (lookup site.components 'axon-server-reference')}}
+      <section class="product-group" data-product="as" data-product-name="Axon Server" data-product-icon="img">
+        <header class="product-group-head">
+          <span class="product-group-icon"><img src="{{uiRootPath}}/img/axon-server.svg" alt=""/></span>
+          <span class="product-group-name">Axon Server</span>
+        </header>
+        <ul class="product-versions">
+          {{#with (lookup site.components 'axon-server-reference')}}
+          {{#each versions}}
+          <li><a role="menuitem" class="product-version" data-version="{{version}}" href="{{{relativize url}}}"><span class="pv-num">{{#if displayVersion}}{{displayVersion}}{{else}}{{#if version}}{{version}}{{else}}Reference{{/if}}{{/if}}</span>{{#if (eq version ../latest.version)}}<span class="pv-tag pv-tag--latest">Latest</span>{{/if}}{{#if prerelease}}<span class="pv-tag pv-tag--dev">Dev</span>{{/if}}</a></li>
+          {{/each}}
+          {{/with}}
+        </ul>
+      </section>
+      {{/if}}
+
+      {{#if (lookup site.components 'synapse-reference')}}
+      <section class="product-group" data-product="synapse" data-product-name="Axon Synapse" data-product-icon="synapse">
+        <header class="product-group-head">
+          <span class="product-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></span>
+          <span class="product-group-name">Axon Synapse</span>
+        </header>
+        <ul class="product-versions">
+          {{#with (lookup site.components 'synapse-reference')}}
+          {{#each versions}}
+          <li><a role="menuitem" class="product-version" data-version="{{version}}" href="{{{relativize url}}}"><span class="pv-num">{{#if displayVersion}}{{displayVersion}}{{else}}{{#if version}}{{version}}{{else}}Reference{{/if}}{{/if}}</span>{{#if (eq version ../latest.version)}}<span class="pv-tag pv-tag--latest">Latest</span>{{/if}}{{#if prerelease}}<span class="pv-tag pv-tag--dev">Dev</span>{{/if}}</a></li>
+          {{/each}}
+          {{/with}}
+        </ul>
+      </section>
+      {{/if}}
+
+      {{#if (lookup site.components 'axoniq-platform-reference')}}
+      <section class="product-group" data-product="platform" data-product-name="Axoniq Platform" data-product-icon="platform">
+        <header class="product-group-head">
+          <span class="product-group-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></span>
+          <span class="product-group-name">Axoniq Platform</span>
+        </header>
+        <ul class="product-versions">
+          {{#with (lookup site.components 'axoniq-platform-reference')}}
+          {{#each versions}}
+          <li><a role="menuitem" class="product-version" data-version="{{version}}" href="{{{relativize url}}}"><span class="pv-num">{{#if displayVersion}}{{displayVersion}}{{else}}{{#if version}}{{version}}{{else}}Reference{{/if}}{{/if}}</span>{{#if (eq version ../latest.version)}}<span class="pv-tag pv-tag--latest">Latest</span>{{/if}}{{#if prerelease}}<span class="pv-tag pv-tag--dev">Dev</span>{{/if}}</a></li>
+          {{/each}}
+          {{/with}}
+        </ul>
+      </section>
+      {{/if}}
+
+      {{!--
+        Extensions: one flat product-group per extension component, generated
+        at build time by nav-assembler.js (see nav-extension-products.hbs) —
+        reuses the same *-extension-reference name match already driving the
+        nav tree's own "Extensions" section, instead of a second hand-
+        maintained list that could drift out of sync with it.
+      --}}
+      <div class="product-menu-divider">Extensions</div>
+      {{> nav-extension-products}}
+
+    </div>
+  </div>
+
+  <div class="drawer-body">
+    {{> (navPartial page.component.name page.version) }}
+  </div>
+
+  <div class="drawer-footer">
+    <a class="drawer-footer-link" href="https://platform.axoniq.io" target="_blank" rel="noopener">
+      <span>Axoniq Platform</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><polyline points="8 7 17 7 17 16"/></svg>
+    </a>
+  </div>
+
+</nav>
