@@ -11,11 +11,18 @@
   app.js and custom.css behave the same either way. page.navigation is a list
   of top-level MENUS (usually one untitled menu per nav.adoc), so it's
   flattened first via navNativeItems — see there.
+
+  The section title is a <div role="heading" aria-level="3">, not a literal
+  <h3>: it's drawer chrome (the component's own title), not real page
+  content, so it shouldn't compete with the page's own headings in the
+  document's native heading outline — but the ARIA role/level keeps it
+  discoverable as a heading for assistive tech. Mirrors nav-assembler.js's
+  sectionHtml().
 --}}
 {{#with (navNativeItems page.navigation)}}
 {{#if length}}
 <section class="nav-section">
-  <h3 class="nav-section-title">{{#with @root.page.componentVersion}}{{title}}{{/with}}</h3>
+  <div class="nav-section-title" role="heading" aria-level="3">{{#with @root.page.componentVersion}}{{title}}{{/with}}</div>
   <ul class="nav-tree">
     {{#each this}}
     {{> nav-native-item navPath=@index}}
