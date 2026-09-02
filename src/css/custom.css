@@ -48,8 +48,12 @@ html {
    anchored the same way nav-container/topbar already are, spanning the full
    viewport width above both (z-index between topbar/nav-container's 30/40
    and the banner's 56, since it sits at a different y-offset than the banner
-   and never needs to compete with it directly). */
-.content_container::before {
+   and never needs to compete with it directly).
+   Scoped to body:has(.banner): the line sits below the banner, so without
+   one it has nothing to visually separate from content — --banner-height
+   would otherwise fall back to its 40px default and draw the line floating
+   over the topbar instead. */
+body:has(.banner) .content_container::before {
   content: "";
   position: fixed;
   top: var(--banner-height);

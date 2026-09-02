@@ -1,0 +1,19 @@
+{{!-- Recursive item renderer for nav-native.hbs — see that file. --}}
+{{#if ./items.length}}
+<li><details class="nav-group" data-nav-id="nav-native-{{navPath}}">
+  <summary class="nav-link nav-parent"{{#if ./url}} data-href="{{./url}}"{{/if}}>
+    {{#if ./url}}<a class="nav-parent-link" href="{{./url}}"><span>{{{./content}}}</span></a>{{else}}<span>{{{./content}}}</span>{{/if}}
+  </summary>
+  <ul class="nav-tree">
+    {{#each ./items}}
+    {{> nav-native-item navPath=(navId ../navPath @index)}}
+    {{/each}}
+  </ul>
+</details></li>
+{{else}}
+{{#if ./url}}
+<li><a class="nav-link" data-href="{{./url}}" href="{{./url}}">{{{./content}}}</a></li>
+{{else}}
+<li><span class="nav-link nav-text">{{{./content}}}</span></li>
+{{/if}}
+{{/if}}

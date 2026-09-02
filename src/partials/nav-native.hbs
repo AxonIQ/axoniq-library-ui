@@ -1,0 +1,26 @@
+{{!--
+  Fallback drawer nav, used whenever the `nav-assembler` Antora extension
+  (axoniq-library-site/lib/nav-assembler.js) hasn't run for this build — e.g.
+  an individual repo's own local doc-verification playbook, which never
+  registers it (only the aggregated axoniq-library-site build does; see
+  helpers/navPartial.js).
+
+  Renders the current page's own Antora navigation (page.navigation) directly
+  — no cross-component curation — using the same markup contract the
+  assembled drawer produces (.nav-section/.nav-tree/nav-group/data-href) so
+  app.js and custom.css behave the same either way. page.navigation is a list
+  of top-level MENUS (usually one untitled menu per nav.adoc), so it's
+  flattened first via navNativeItems — see there.
+--}}
+{{#with (navNativeItems page.navigation)}}
+{{#if length}}
+<section class="nav-section">
+  <h3 class="nav-section-title">{{#with @root.page.componentVersion}}{{title}}{{/with}}</h3>
+  <ul class="nav-tree">
+    {{#each this}}
+    {{> nav-native-item navPath=@index}}
+    {{/each}}
+  </ul>
+</section>
+{{/if}}
+{{/with}}
