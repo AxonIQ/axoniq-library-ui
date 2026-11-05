@@ -1,0 +1,34 @@
+version: 2
+
+updates:
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: "sunday"
+  open-pull-requests-limit: 5
+  labels:
+    - "Type: Dependency Upgrade"
+    - "Priority 1: Must"
+  groups:
+    github-dependencies:
+      update-types:
+        - "patch"
+        - "minor"
+        - "major"
+
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: "sunday"
+  open-pull-requests-limit: 5
+  labels:
+    - "Type: Dependency Upgrade"
+    - "Priority 1: Must"
+  groups:
+    npm-dependencies:
+      update-types:
+        - "patch"
+        - "minor"
+        - "major"
