@@ -26,6 +26,10 @@ updates:
   labels:
     - "Type: Dependency Upgrade"
     - "Priority 1: Must"
+  ignore:
+    # The build uses the cssnano 4 API with postcss 7 (through gulp-postcss 8). cssnano 5+ needs a rewrite of the build task.
+    - dependency-name: "cssnano"
+      update-types: ["version-update:semver-major"]
   groups:
     npm-dependencies:
       update-types:
