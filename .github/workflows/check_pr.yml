@@ -1,0 +1,27 @@
+name: Check Pull Request
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    - name: Install Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: '22'
+        cache: npm
+
+    - name: Install Dependencies
+      run: npm ci
+
+    # The bundle task lints the CSS and JavaScript, then builds the UI (browserify, postcss, cssnano, imagemin) and zips it.
+    - name: Build UI Bundle
+      run: npx gulp bundle
+
+    - name: Verify UI Bundle
+      run: test -s build/ui-bundle.zip
