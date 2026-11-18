@@ -3,6 +3,22 @@
   "rules": {
     "comment-empty-line-before": null,
     "no-descending-specificity": null,
-    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["where"] }]
+    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["where"] }],
+    "alpha-value-notation": null,
+    "color-function-alias-notation": null,
+    "color-function-notation": null,
+    "custom-property-pattern": null,
+    "declaration-block-no-duplicate-custom-properties": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "font-family-name-quotes": null,
+    "function-url-quotes": null,
+    "import-notation": null,
+    "media-feature-range-notation": null,
+    "property-no-deprecated": null,
+    "property-no-vendor-prefix": null,
+    "selector-class-pattern": null,
+    "selector-not-notation": null,
+    "shorthand-property-no-redundant-values": null,
+    "value-keyword-case": null
   }
 }
